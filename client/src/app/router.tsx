@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { LoginPage } from '@/features/auth'
 import { ItemsPage } from '@/features/items'
+import { SettingsPage } from '@/features/settings'
 import { ProtectedRoute } from '@/components/shared/ProtectedRoute'
 import { GuestRoute } from '@/components/shared/GuestRoute'
 import { AppLayout } from '@/components/layout/AppLayout'
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
           {
             path: '/items',
             element: <ItemsPage />,
+          },
+          {
+            path: '/settings',
+            element: <SettingsPage />,
           },
           {
             path: '*',

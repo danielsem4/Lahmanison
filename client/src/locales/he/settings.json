@@ -1,0 +1,22 @@
+{
+  "title": "הגדרות",
+  "subtitle": "ניהול ההעדפות והחשבון שלך",
+  "appearance": {
+    "title": "מראה",
+    "subtitle": "התאמת המראה וכיוון הקריאה של האפליקציה",
+    "theme": "ערכת נושא",
+    "themeLight": "בהיר",
+    "themeDark": "כהה",
+    "themeSystem": "מערכת",
+    "language": "שפה"
+  },
+  "account": {
+    "title": "חשבון",
+    "subtitle": "פרטי הפרופיל שלך",
+    "name": "שם",
+    "email": "דוא\"ל",
+    "role": "תפקיד",
+    "roleAdmin": "מנהל",
+    "roleUser": "משתמש"
+  }
+}

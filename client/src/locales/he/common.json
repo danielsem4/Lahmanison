@@ -1,7 +1,8 @@
 {
   "appName": "לחמניסון",
   "nav": {
-    "items": "פריטים"
+    "items": "פריטים",
+    "settings": "הגדרות"
   },
   "logout": {
     "title": "התנתקות",

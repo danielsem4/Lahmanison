@@ -1,0 +1,22 @@
+{
+  "title": "Settings",
+  "subtitle": "Manage your preferences and account",
+  "appearance": {
+    "title": "Appearance",
+    "subtitle": "Customize how the app looks and reads",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "language": "Language"
+  },
+  "account": {
+    "title": "Account",
+    "subtitle": "Your profile details",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "roleAdmin": "Admin",
+    "roleUser": "User"
+  }
+}
