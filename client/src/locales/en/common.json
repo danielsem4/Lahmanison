@@ -1,0 +1,19 @@
+{
+  "appName": "Lahmanison",
+  "nav": {
+    "items": "Items"
+  },
+  "logout": {
+    "title": "Sign out",
+    "description": "Are you sure you want to sign out?",
+    "cancel": "Cancel",
+    "confirm": "Sign out"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page not found",
+      "description": "The page you are looking for does not exist.",
+      "goHome": "Go home"
+    }
+  }
+}

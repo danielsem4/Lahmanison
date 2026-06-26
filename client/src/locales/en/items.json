@@ -1,0 +1,35 @@
+{
+  "title": "Items",
+  "subtitle": "An example feature module — copy it to build your own.",
+  "addItem": "Add item",
+  "empty": "No items yet. Create your first one.",
+  "table": {
+    "title": "Title",
+    "description": "Description",
+    "actions": "Actions"
+  },
+  "form": {
+    "createTitle": "Create item",
+    "editTitle": "Edit item",
+    "description": "Fill in the details below.",
+    "titleLabel": "Title",
+    "descriptionLabel": "Description",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "delete": {
+    "title": "Delete item",
+    "description": "This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Delete"
+  },
+  "validation": {
+    "titleRequired": "Title is required"
+  },
+  "toast": {
+    "created": "Item created",
+    "updated": "Item updated",
+    "deleted": "Item deleted",
+    "error": "Something went wrong"
+  }
+}

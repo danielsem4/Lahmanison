@@ -1,0 +1,35 @@
+{
+  "title": "פריטים",
+  "subtitle": "מודול דוגמה — העתק אותו כדי לבנות מודולים משלך.",
+  "addItem": "הוסף פריט",
+  "empty": "אין פריטים עדיין. צור את הראשון שלך.",
+  "table": {
+    "title": "כותרת",
+    "description": "תיאור",
+    "actions": "פעולות"
+  },
+  "form": {
+    "createTitle": "יצירת פריט",
+    "editTitle": "עריכת פריט",
+    "description": "מלא את הפרטים למטה.",
+    "titleLabel": "כותרת",
+    "descriptionLabel": "תיאור",
+    "cancel": "ביטול",
+    "save": "שמור"
+  },
+  "delete": {
+    "title": "מחיקת פריט",
+    "description": "לא ניתן לבטל פעולה זו.",
+    "cancel": "ביטול",
+    "confirm": "מחק"
+  },
+  "validation": {
+    "titleRequired": "נדרשת כותרת"
+  },
+  "toast": {
+    "created": "הפריט נוצר",
+    "updated": "הפריט עודכן",
+    "deleted": "הפריט נמחק",
+    "error": "משהו השתבש"
+  }
+}
