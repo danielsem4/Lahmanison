@@ -1,7 +1,9 @@
 {
   "appName": "לחמניסון",
   "nav": {
-    "items": "פריטים"
+    "items": "פריטים",
+    "managers": "מנהלים",
+    "settings": "הגדרות"
   },
   "logout": {
     "title": "התנתקות",

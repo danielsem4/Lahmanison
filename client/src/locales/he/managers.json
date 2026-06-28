@@ -1,0 +1,59 @@
+{
+  "title": "מנהלים",
+  "subtitle": "יצירה וניהול של המנהלים במערכת.",
+  "addManager": "הוספת מנהל",
+  "empty": "אין מנהלים עדיין. הוסיפו את הראשון.",
+  "table": {
+    "name": "שם",
+    "phone": "טלפון",
+    "email": "אימייל",
+    "actions": "פעולות"
+  },
+  "actions": {
+    "view": "צפייה",
+    "edit": "עריכה",
+    "delete": "מחיקה"
+  },
+  "form": {
+    "createTitle": "הוספת מנהל",
+    "editTitle": "עריכת מנהל",
+    "description": "מלאו את פרטי המנהל למטה.",
+    "firstNameLabel": "שם פרטי",
+    "lastNameLabel": "שם משפחה",
+    "emailLabel": "אימייל",
+    "phoneLabel": "מספר טלפון",
+    "passwordNote": "סיסמה תיווצר ותישלח למנהל באימייל.",
+    "cancel": "ביטול",
+    "save": "שמירה"
+  },
+  "view": {
+    "title": "פרטי מנהל",
+    "description": "תצוגה לקריאה בלבד של המנהל."
+  },
+  "credentials": {
+    "title": "המנהל נוצר",
+    "description": "פרטי ההתחברות שלמטה נשלחו למנהל באימייל. הם מוצגים כאן לצורכי פיתוח בלבד.",
+    "email": "אימייל",
+    "password": "סיסמה",
+    "done": "סיום"
+  },
+  "delete": {
+    "title": "מחיקת מנהל",
+    "description": "לא ניתן לבטל פעולה זו.",
+    "cancel": "ביטול",
+    "confirm": "מחיקה"
+  },
+  "validation": {
+    "firstNameRequired": "שם פרטי הוא שדה חובה",
+    "lastNameRequired": "שם משפחה הוא שדה חובה",
+    "emailRequired": "אימייל הוא שדה חובה",
+    "emailInvalid": "יש להזין אימייל תקין",
+    "phoneRequired": "מספר טלפון הוא שדה חובה"
+  },
+  "toast": {
+    "created": "המנהל נוצר",
+    "updated": "המנהל עודכן",
+    "deleted": "המנהל נמחק",
+    "error": "משהו השתבש"
+  }
+}

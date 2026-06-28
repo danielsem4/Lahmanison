@@ -12,7 +12,8 @@ datasource db {
 
 enum Role {
   ADMIN
-  USER
+  MANAGER
+  AGENT
 }
 
 // ─── User ────────────────────────────────────────────────
@@ -21,8 +22,11 @@ model User {
   id           Int     @id @default(autoincrement())
   email        String  @unique
   name         String?
+  firstName    String?
+  lastName     String?
+  phone        String?
   hashPassword String
-  role         Role    @default(USER)
+  role         Role    @default(AGENT)
   isActive     Boolean @default(true)
 
   items Item[]

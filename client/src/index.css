@@ -92,8 +92,8 @@
   --chart-4: oklch(0.627 0.176 19.373); /* #e74c3c - Critical red */
   --chart-5: oklch(0.689 0.153 310.357); /* #9b59b6 - Medical purple */
 
-  /* Radius — 24px friendly high-end (kept from current app) */
-  --radius: 1.5rem;
+  /* Radius — 12px for slightly less rounded shapes */
+  --radius: 0.75rem;
 
   /* Sidebar colors */
   --sidebar: oklch(1 0 0); /* #ffffff - White sidebar */

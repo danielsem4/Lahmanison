@@ -1,7 +1,9 @@
 {
   "appName": "Lahmanison",
   "nav": {
-    "items": "Items"
+    "items": "Items",
+    "managers": "Managers",
+    "settings": "Settings"
   },
   "logout": {
     "title": "Sign out",

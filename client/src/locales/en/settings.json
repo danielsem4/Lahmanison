@@ -1,0 +1,42 @@
+{
+  "title": "Settings",
+  "subtitle": "Manage your preferences and account",
+  "appearance": {
+    "title": "Appearance",
+    "subtitle": "Customize how the app looks and reads",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "language": "Language"
+  },
+  "account": {
+    "title": "Account",
+    "subtitle": "Your profile details",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "roleAdmin": "Admin",
+    "roleManager": "Manager",
+    "roleAgent": "Agent",
+    "roleUser": "User"
+  },
+  "security": {
+    "title": "Security",
+    "subtitle": "Change your account password",
+    "currentPasswordLabel": "Current password",
+    "newPasswordLabel": "New password",
+    "confirmPasswordLabel": "Confirm new password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "submit": "Update password",
+    "currentRequired": "Current password is required",
+    "newMinLength": "Password must be at least 8 characters",
+    "confirmRequired": "Please confirm your new password",
+    "mismatch": "Passwords do not match",
+    "toast": {
+      "success": "Password updated successfully",
+      "error": "Could not update password"
+    }
+  }
+}

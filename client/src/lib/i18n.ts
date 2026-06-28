@@ -5,21 +5,25 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 import enCommon from '@/locales/en/common.json'
 import enAuth from '@/locales/en/auth.json'
 import enItems from '@/locales/en/items.json'
+import enManagers from '@/locales/en/managers.json'
+import enSettings from '@/locales/en/settings.json'
 import heCommon from '@/locales/he/common.json'
 import heAuth from '@/locales/he/auth.json'
 import heItems from '@/locales/he/items.json'
+import heManagers from '@/locales/he/managers.json'
+import heSettings from '@/locales/he/settings.json'
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources: {
-      en: { common: enCommon, auth: enAuth, items: enItems },
-      he: { common: heCommon, auth: heAuth, items: heItems },
+      en: { common: enCommon, auth: enAuth, items: enItems, managers: enManagers, settings: enSettings },
+      he: { common: heCommon, auth: heAuth, items: heItems, managers: heManagers, settings: heSettings },
     },
     fallbackLng: 'he',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'items'],
+    ns: ['common', 'auth', 'items', 'managers', 'settings'],
     interpolation: {
       escapeValue: false,
     },

@@ -2,7 +2,9 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { AppError } from '../../shared/errors/AppError';
 import type { IAuthRepository } from './auth.repository';
-import type { LoginDto } from './auth.schema';
+import type { ChangePasswordDto, LoginDto } from './auth.schema';
+
+const SALT_ROUNDS = 10;
 
 export interface UserShape {
   id: string;
@@ -58,5 +60,20 @@ export class AuthService {
       throw new AppError('Authentication required', 401);
     }
     return toUserShape(user);
+  }
+
+  async changePassword(userId: number, dto: ChangePasswordDto): Promise<void> {
+    const user = await this.repository.findById(userId);
+    if (!user || !user.isActive) {
+      throw new AppError('Authentication required', 401);
+    }
+
+    const isValid = await bcrypt.compare(dto.currentPassword, user.hashPassword);
+    if (!isValid) {
+      throw new AppError('Current password is incorrect', 400);
+    }
+
+    const hashPassword = await bcrypt.hash(dto.newPassword, SALT_ROUNDS);
+    await this.repository.updatePassword(userId, hashPassword);
   }
 }

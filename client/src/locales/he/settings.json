@@ -1,0 +1,42 @@
+{
+  "title": "הגדרות",
+  "subtitle": "ניהול ההעדפות והחשבון שלך",
+  "appearance": {
+    "title": "מראה",
+    "subtitle": "התאמת המראה וכיוון הקריאה של האפליקציה",
+    "theme": "ערכת נושא",
+    "themeLight": "בהיר",
+    "themeDark": "כהה",
+    "themeSystem": "מערכת",
+    "language": "שפה"
+  },
+  "account": {
+    "title": "חשבון",
+    "subtitle": "פרטי הפרופיל שלך",
+    "name": "שם",
+    "email": "דוא\"ל",
+    "role": "תפקיד",
+    "roleAdmin": "מנהל מערכת",
+    "roleManager": "מנהל",
+    "roleAgent": "סוכן",
+    "roleUser": "משתמש"
+  },
+  "security": {
+    "title": "אבטחה",
+    "subtitle": "שינוי הסיסמה של החשבון שלך",
+    "currentPasswordLabel": "סיסמה נוכחית",
+    "newPasswordLabel": "סיסמה חדשה",
+    "confirmPasswordLabel": "אימות סיסמה חדשה",
+    "showPassword": "הצג סיסמה",
+    "hidePassword": "הסתר סיסמה",
+    "submit": "עדכון סיסמה",
+    "currentRequired": "יש להזין את הסיסמה הנוכחית",
+    "newMinLength": "הסיסמה חייבת להכיל לפחות 8 תווים",
+    "confirmRequired": "יש לאמת את הסיסמה החדשה",
+    "mismatch": "הסיסמאות אינן תואמות",
+    "toast": {
+      "success": "הסיסמה עודכנה בהצלחה",
+      "error": "לא ניתן היה לעדכן את הסיסמה"
+    }
+  }
+}
