@@ -54,7 +54,7 @@ export function AppSidebar({ navItems, onLogout, userName }: SidebarProps) {
           <SidebarMenu>
             {navItems.map((item) => (
               <SidebarMenuItem key={item.path}>
-                <NavLink to={item.path}>
+                <NavLink to={item.path} end={item.path === '/'}>
                   {({ isActive }) => (
                     <SidebarMenuButton isActive={isActive} tooltip={item.label} asChild={false}>
                       <item.icon className="size-4 shrink-0" />

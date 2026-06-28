@@ -2,6 +2,7 @@
   "appName": "לחמניסון",
   "nav": {
     "items": "פריטים",
+    "managers": "מנהלים",
     "settings": "הגדרות"
   },
   "logout": {

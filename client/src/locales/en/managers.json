@@ -1,0 +1,59 @@
+{
+  "title": "Managers",
+  "subtitle": "Create and manage the managers in the system.",
+  "addManager": "Add manager",
+  "empty": "No managers yet. Add your first one.",
+  "table": {
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "actions": "Actions"
+  },
+  "actions": {
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "form": {
+    "createTitle": "Add manager",
+    "editTitle": "Edit manager",
+    "description": "Fill in the manager's details below.",
+    "firstNameLabel": "First name",
+    "lastNameLabel": "Last name",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone number",
+    "passwordNote": "A password will be generated and emailed to the manager.",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "view": {
+    "title": "Manager details",
+    "description": "Read-only view of the manager."
+  },
+  "credentials": {
+    "title": "Manager created",
+    "description": "The credentials below were emailed to the manager. They are shown here for development only.",
+    "email": "Email",
+    "password": "Password",
+    "done": "Done"
+  },
+  "delete": {
+    "title": "Delete manager",
+    "description": "This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Delete"
+  },
+  "validation": {
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "A valid email is required",
+    "phoneRequired": "Phone number is required"
+  },
+  "toast": {
+    "created": "Manager created",
+    "updated": "Manager updated",
+    "deleted": "Manager deleted",
+    "error": "Something went wrong"
+  }
+}

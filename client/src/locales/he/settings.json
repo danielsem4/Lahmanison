@@ -16,7 +16,27 @@
     "name": "שם",
     "email": "דוא\"ל",
     "role": "תפקיד",
-    "roleAdmin": "מנהל",
+    "roleAdmin": "מנהל מערכת",
+    "roleManager": "מנהל",
+    "roleAgent": "סוכן",
     "roleUser": "משתמש"
+  },
+  "security": {
+    "title": "אבטחה",
+    "subtitle": "שינוי הסיסמה של החשבון שלך",
+    "currentPasswordLabel": "סיסמה נוכחית",
+    "newPasswordLabel": "סיסמה חדשה",
+    "confirmPasswordLabel": "אימות סיסמה חדשה",
+    "showPassword": "הצג סיסמה",
+    "hidePassword": "הסתר סיסמה",
+    "submit": "עדכון סיסמה",
+    "currentRequired": "יש להזין את הסיסמה הנוכחית",
+    "newMinLength": "הסיסמה חייבת להכיל לפחות 8 תווים",
+    "confirmRequired": "יש לאמת את הסיסמה החדשה",
+    "mismatch": "הסיסמאות אינן תואמות",
+    "toast": {
+      "success": "הסיסמה עודכנה בהצלחה",
+      "error": "לא ניתן היה לעדכן את הסיסמה"
+    }
   }
 }

@@ -31,7 +31,7 @@ export function LoginPage() {
   })
 
   if (isAuthenticated) {
-    return <Navigate to="/items" replace />
+    return <Navigate to="/" replace />
   }
 
   function onSubmit(data: LoginFormData) {

@@ -2,6 +2,7 @@
   "appName": "Lahmanison",
   "nav": {
     "items": "Items",
+    "managers": "Managers",
     "settings": "Settings"
   },
   "logout": {

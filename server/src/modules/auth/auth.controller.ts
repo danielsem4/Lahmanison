@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import type { AuthService } from './auth.service';
-import type { LoginDto } from './auth.schema';
+import type { ChangePasswordDto, LoginDto } from './auth.schema';
 import {
   AUTH_COOKIE_NAME,
   AUTH_COOKIE_OPTIONS,
@@ -23,6 +23,15 @@ export function createAuthController(service: AuthService) {
       try {
         const user = await service.getMe(req.currentUser!.userId);
         res.json({ user });
+      } catch (err) {
+        next(err);
+      }
+    },
+
+    async changePassword(req: Request, res: Response, next: NextFunction): Promise<void> {
+      try {
+        await service.changePassword(req.currentUser!.userId, req.body as ChangePasswordDto);
+        res.json({ message: 'Password updated' });
       } catch (err) {
         next(err);
       }

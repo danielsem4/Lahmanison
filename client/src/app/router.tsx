@@ -1,6 +1,8 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import { LoginPage } from '@/features/auth'
 import { ItemsPage } from '@/features/items'
+import { ManagersPage } from '@/features/managers'
+import { RoleHome } from '@/features/home/RoleHome'
 import { SettingsPage } from '@/features/settings'
 import { ProtectedRoute } from '@/components/shared/ProtectedRoute'
 import { GuestRoute } from '@/components/shared/GuestRoute'
@@ -8,10 +10,6 @@ import { AppLayout } from '@/components/layout/AppLayout'
 import { NotFoundPage } from '@/components/shared/NotFoundPage'
 
 export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Navigate to="/items" replace />,
-  },
   {
     element: <GuestRoute />,
     children: [
@@ -27,6 +25,14 @@ export const router = createBrowserRouter([
       {
         element: <AppLayout />,
         children: [
+          {
+            index: true,
+            element: <RoleHome />,
+          },
+          {
+            path: '/managers',
+            element: <ManagersPage />,
+          },
           {
             path: '/items',
             element: <ItemsPage />,

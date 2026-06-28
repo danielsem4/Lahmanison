@@ -14,7 +14,9 @@ const SALT_ROUNDS = 10;
 
 interface SeedUser {
   email: string;
-  name: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
   role: Role;
   password: string;
 }
@@ -22,15 +24,19 @@ interface SeedUser {
 const users: SeedUser[] = [
   {
     email: 'admin@lahmanison.local',
-    name: 'Admin User',
+    firstName: 'Admin',
+    lastName: 'User',
+    phone: '+972500000000',
     role: Role.ADMIN,
     password: 'Admin123!',
   },
   {
-    email: 'user@lahmanison.local',
-    name: 'Regular User',
-    role: Role.USER,
-    password: 'User123!',
+    email: 'manager@lahmanison.local',
+    firstName: 'Manager',
+    lastName: 'User',
+    phone: '+972500000001',
+    role: Role.MANAGER,
+    password: 'Manager123!',
   },
 ];
 
@@ -39,10 +45,27 @@ async function main() {
 
   for (const u of users) {
     const hashPassword = await bcrypt.hash(u.password, SALT_ROUNDS);
+    const name = `${u.firstName} ${u.lastName}`;
     await prisma.user.upsert({
       where: { email: u.email },
-      update: { name: u.name, role: u.role, hashPassword, isActive: true },
-      create: { email: u.email, name: u.name, role: u.role, hashPassword },
+      update: {
+        name,
+        firstName: u.firstName,
+        lastName: u.lastName,
+        phone: u.phone,
+        role: u.role,
+        hashPassword,
+        isActive: true,
+      },
+      create: {
+        email: u.email,
+        name,
+        firstName: u.firstName,
+        lastName: u.lastName,
+        phone: u.phone,
+        role: u.role,
+        hashPassword,
+      },
     });
   }
   console.log(`Seeded ${users.length} users.`);

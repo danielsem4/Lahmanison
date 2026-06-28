@@ -6,5 +6,5 @@ export function GuestRoute() {
 
   if (isLoading) return null
 
-  return isAuthenticated ? <Navigate to="/items" replace /> : <Outlet />
+  return isAuthenticated ? <Navigate to="/" replace /> : <Outlet />
 }

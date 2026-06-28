@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { LayoutList, Settings } from 'lucide-react'
+import { LayoutList, Settings, Users } from 'lucide-react'
 import { AppSidebar } from '@/components/layout/Sidebar'
 import { SidebarProvider, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar'
 import { useAuth } from '@/features/auth'
@@ -16,8 +16,13 @@ export function AppLayout() {
     navigate('/login')
   }
 
+  const homeNavItem: NavItem =
+    user?.role === 'ADMIN'
+      ? { label: t('nav.managers'), path: '/', icon: Users }
+      : { label: t('nav.items'), path: '/', icon: LayoutList }
+
   const navItems: NavItem[] = [
-    { label: t('nav.items'), path: '/items', icon: LayoutList },
+    homeNavItem,
     { label: t('nav.settings'), path: '/settings', icon: Settings },
   ]
 

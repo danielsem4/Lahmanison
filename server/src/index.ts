@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import { authRouter } from './modules/auth/auth.routes';
 import { itemsRouter } from './modules/items/items.routes';
+import { managersRouter } from './modules/managers/managers.routes';
 import { errorHandler } from './shared/middlewares/errorHandler';
 
 const app = express();
@@ -32,6 +33,7 @@ app.get('/api/health', (_req: Request, res: Response) => {
 // Module routes
 app.use('/api/auth', authRouter);
 app.use('/api/items', itemsRouter);
+app.use('/api/managers', managersRouter);
 
 // Error handler (must be last)
 app.use(errorHandler);
