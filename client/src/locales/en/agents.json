@@ -1,9 +1,9 @@
 {
-  "title": "Managers",
-  "subtitle": "Create and manage the managers in the system.",
-  "addManager": "Add manager",
-  "listTitle": "Managers ({{count}})",
-  "empty": "No managers yet. Add your first one.",
+  "title": "Agents",
+  "subtitle": "Create and manage the agents in the system.",
+  "addAgent": "Add agent",
+  "listTitle": "Agents ({{count}})",
+  "empty": "No agents yet. Add your first one.",
   "table": {
     "name": "Name",
     "phone": "Phone",
@@ -16,30 +16,35 @@
     "delete": "Delete"
   },
   "form": {
-    "createTitle": "Add manager",
-    "editTitle": "Edit manager",
-    "description": "Fill in the manager's details below.",
+    "createTitle": "Add agent",
+    "editTitle": "Edit agent",
+    "description": "Fill in the agent's details below.",
     "firstNameLabel": "First name",
     "lastNameLabel": "Last name",
     "emailLabel": "Email",
     "phoneLabel": "Phone number",
-    "passwordNote": "A password will be generated and emailed to the manager.",
+    "passwordNote": "A password will be generated and emailed to the agent.",
     "cancel": "Cancel",
     "save": "Save"
   },
   "view": {
-    "title": "Manager details",
-    "description": "Read-only view of the manager."
+    "title": "Agent details",
+    "description": "Read-only view of the agent."
+  },
+  "detail": {
+    "back": "Back",
+    "detailsTitle": "Details",
+    "notFound": "Agent not found."
   },
   "credentials": {
-    "title": "Manager created",
-    "description": "The credentials below were emailed to the manager. They are shown here for development only.",
+    "title": "Agent created",
+    "description": "The credentials below were emailed to the agent. They are shown here for development only.",
     "email": "Email",
     "password": "Password",
     "done": "Done"
   },
   "delete": {
-    "title": "Delete manager",
+    "title": "Delete agent",
     "description": "This action cannot be undone.",
     "cancel": "Cancel",
     "confirm": "Delete"
@@ -52,9 +57,9 @@
     "phoneRequired": "Phone number is required"
   },
   "toast": {
-    "created": "Manager created",
-    "updated": "Manager updated",
-    "deleted": "Manager deleted",
+    "created": "Agent created",
+    "updated": "Agent updated",
+    "deleted": "Agent deleted",
     "error": "Something went wrong"
   }
 }

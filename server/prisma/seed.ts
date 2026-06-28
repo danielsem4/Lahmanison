@@ -1,5 +1,5 @@
 import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient, Role } from '@prisma/client';
+import { PrismaClient, Role, PatientStatus } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import pg from 'pg';
 import 'dotenv/config';
@@ -83,6 +83,47 @@ async function main() {
     ],
   });
   console.log('Seeded 2 example items.');
+
+  // Reset and seed sample patients (idempotent)
+  await prisma.patient.deleteMany();
+  await prisma.patient.createMany({
+    data: [
+      {
+        firstName: 'Dana',
+        lastName: 'Cohen',
+        name: 'Dana Cohen',
+        email: 'dana.cohen@example.com',
+        phone: '+972501111111',
+        age: 34,
+        hasImage: true,
+        status: PatientStatus.IN_TREATMENT,
+        statusNote: 'Weekly follow-up',
+      },
+      {
+        firstName: 'Yossi',
+        lastName: 'Levi',
+        name: 'Yossi Levi',
+        email: 'yossi.levi@example.com',
+        phone: '+972502222222',
+        age: 52,
+        hasImage: false,
+        status: PatientStatus.PENDING,
+        statusNote: null,
+      },
+      {
+        firstName: 'Maya',
+        lastName: 'Bar',
+        name: 'Maya Bar',
+        email: 'maya.bar@example.com',
+        phone: '+972503333333',
+        age: 27,
+        hasImage: true,
+        status: PatientStatus.DISCHARGED,
+        statusNote: 'Completed treatment',
+      },
+    ],
+  });
+  console.log('Seeded 3 sample patients.');
 }
 
 main()

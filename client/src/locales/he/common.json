@@ -3,7 +3,15 @@
   "nav": {
     "items": "פריטים",
     "managers": "מנהלים",
+    "agents": "סוכנים",
+    "patients": "מטופלים",
+    "analytics": "אנליטיקה",
     "settings": "הגדרות"
+  },
+  "table": {
+    "searchPlaceholder": "חיפוש לפי שם, אימייל או טלפון",
+    "clearSearch": "ניקוי חיפוש",
+    "noResults": "לא נמצאו תוצאות תואמות."
   },
   "logout": {
     "title": "התנתקות",

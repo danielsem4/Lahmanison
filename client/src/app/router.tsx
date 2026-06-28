@@ -2,6 +2,9 @@ import { createBrowserRouter } from 'react-router-dom'
 import { LoginPage } from '@/features/auth'
 import { ItemsPage } from '@/features/items'
 import { ManagersPage } from '@/features/managers'
+import { AgentsPage, AgentDetailPage } from '@/features/agents'
+import { PatientsPage, PatientDetailPage } from '@/features/patients'
+import { AnalyticsPage } from '@/features/analytics'
 import { RoleHome } from '@/features/home/RoleHome'
 import { SettingsPage } from '@/features/settings'
 import { ProtectedRoute } from '@/components/shared/ProtectedRoute'
@@ -32,6 +35,26 @@ export const router = createBrowserRouter([
           {
             path: '/managers',
             element: <ManagersPage />,
+          },
+          {
+            path: '/agents',
+            element: <AgentsPage />,
+          },
+          {
+            path: '/agents/:id',
+            element: <AgentDetailPage />,
+          },
+          {
+            path: '/patients',
+            element: <PatientsPage />,
+          },
+          {
+            path: '/patients/:id',
+            element: <PatientDetailPage />,
+          },
+          {
+            path: '/analytics',
+            element: <AnalyticsPage />,
           },
           {
             path: '/items',
