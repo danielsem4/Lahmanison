@@ -1,0 +1,23 @@
+{
+  "title": "קבצים",
+  "cardTitle": "מסמכים",
+  "upload": "העלאת קובץ",
+  "uploading": "מעלה...",
+  "empty": "אין קבצים עדיין.",
+  "fileName": "שם",
+  "fileSize": "גודל",
+  "uploadedAt": "הועלה",
+  "actions": "פעולות",
+  "view": "צפייה",
+  "download": "הורדה",
+  "delete": "מחיקה",
+  "deleteTitle": "מחיקת קובץ",
+  "deleteDescription": "האם אתה בטוח שברצונך למחוק את הקובץ? לא ניתן לבטל פעולה זו.",
+  "cancel": "ביטול",
+  "confirm": "מחיקה",
+  "toast": {
+    "uploaded": "הקובץ הועלה",
+    "deleted": "הקובץ נמחק",
+    "error": "משהו השתבש"
+  }
+}

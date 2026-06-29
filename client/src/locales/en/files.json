@@ -1,0 +1,23 @@
+{
+  "title": "Files",
+  "cardTitle": "Documents",
+  "upload": "Upload file",
+  "uploading": "Uploading...",
+  "empty": "No files yet.",
+  "fileName": "Name",
+  "fileSize": "Size",
+  "uploadedAt": "Uploaded",
+  "actions": "Actions",
+  "view": "View",
+  "download": "Download",
+  "delete": "Delete",
+  "deleteTitle": "Delete file",
+  "deleteDescription": "Are you sure you want to delete this file? This action cannot be undone.",
+  "cancel": "Cancel",
+  "confirm": "Delete",
+  "toast": {
+    "uploaded": "File uploaded",
+    "deleted": "File deleted",
+    "error": "Something went wrong"
+  }
+}

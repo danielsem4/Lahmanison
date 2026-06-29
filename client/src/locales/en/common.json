@@ -8,8 +8,13 @@
     "patients": "Patients",
     "appointments": "Appointments",
     "tasks": "Tasks",
+    "files": "Files",
     "analytics": "Analytics",
     "settings": "Settings"
+  },
+  "fileViewer": {
+    "previewUnavailable": "Preview is not available for this file type.",
+    "download": "Download"
   },
   "table": {
     "searchPlaceholder": "Search by name, email or phone",

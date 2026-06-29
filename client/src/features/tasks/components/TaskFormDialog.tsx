@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, type Resolver } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
 import { Loader2 } from 'lucide-react'
@@ -63,7 +63,9 @@ export function TaskFormDialog({
     control,
     formState: { errors },
   } = useForm<TaskFormData>({
-    resolver: zodResolver(schema),
+    // schema input type differs from output (z.coerce.number) — cast to the
+    // form's value type, which is what the rest of the component works with.
+    resolver: zodResolver(schema) as Resolver<TaskFormData>,
     defaultValues: emptyValues,
   })
 

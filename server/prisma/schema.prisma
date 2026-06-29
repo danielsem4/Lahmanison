@@ -56,6 +56,7 @@ model User {
   createdAppointments Appointment[] @relation("AppointmentCreator")
   createdTasks        Task[]        @relation("TaskCreator")
   uploadedFiles       PatientFile[] @relation("FileUploader")
+  uploadedDocuments   Document[]    @relation("DocumentUploader")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -171,5 +172,23 @@ model PatientFile {
   createdAt DateTime @default(now())
 
   @@index([patientId])
+  @@index([uploadedById])
+}
+
+// ─── Document (general, non-patient-scoped files) ────────
+
+model Document {
+  id         Int    @id @default(autoincrement())
+  fileName   String // original name shown to the user
+  storageKey String // adapter-relative key (local: "documents/<uuid>")
+  mimeType   String
+  size       Int // bytes
+
+  // The user who uploaded the file. Nullable so files survive if the uploader is deleted.
+  uploadedById Int?
+  uploadedBy   User? @relation("DocumentUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
   @@index([uploadedById])
 }

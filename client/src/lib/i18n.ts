@@ -10,6 +10,7 @@ import enAgents from '@/locales/en/agents.json'
 import enPatients from '@/locales/en/patients.json'
 import enAppointments from '@/locales/en/appointments.json'
 import enTasks from '@/locales/en/tasks.json'
+import enFiles from '@/locales/en/files.json'
 import enDashboard from '@/locales/en/dashboard.json'
 import enAnalytics from '@/locales/en/analytics.json'
 import enSettings from '@/locales/en/settings.json'
@@ -21,6 +22,7 @@ import heAgents from '@/locales/he/agents.json'
 import hePatients from '@/locales/he/patients.json'
 import heAppointments from '@/locales/he/appointments.json'
 import heTasks from '@/locales/he/tasks.json'
+import heFiles from '@/locales/he/files.json'
 import heDashboard from '@/locales/he/dashboard.json'
 import heAnalytics from '@/locales/he/analytics.json'
 import heSettings from '@/locales/he/settings.json'
@@ -30,12 +32,12 @@ i18n
   .use(initReactI18next)
   .init({
     resources: {
-      en: { common: enCommon, auth: enAuth, items: enItems, managers: enManagers, agents: enAgents, patients: enPatients, appointments: enAppointments, tasks: enTasks, dashboard: enDashboard, analytics: enAnalytics, settings: enSettings },
-      he: { common: heCommon, auth: heAuth, items: heItems, managers: heManagers, agents: heAgents, patients: hePatients, appointments: heAppointments, tasks: heTasks, dashboard: heDashboard, analytics: heAnalytics, settings: heSettings },
+      en: { common: enCommon, auth: enAuth, items: enItems, managers: enManagers, agents: enAgents, patients: enPatients, appointments: enAppointments, tasks: enTasks, files: enFiles, dashboard: enDashboard, analytics: enAnalytics, settings: enSettings },
+      he: { common: heCommon, auth: heAuth, items: heItems, managers: heManagers, agents: heAgents, patients: hePatients, appointments: heAppointments, tasks: heTasks, files: heFiles, dashboard: heDashboard, analytics: heAnalytics, settings: heSettings },
     },
     fallbackLng: 'he',
     defaultNS: 'common',
-    ns: ['common', 'auth', 'items', 'managers', 'agents', 'patients', 'appointments', 'tasks', 'dashboard', 'analytics', 'settings'],
+    ns: ['common', 'auth', 'items', 'managers', 'agents', 'patients', 'appointments', 'tasks', 'files', 'dashboard', 'analytics', 'settings'],
     interpolation: {
       escapeValue: false,
     },

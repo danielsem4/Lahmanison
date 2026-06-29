@@ -8,8 +8,13 @@
     "patients": "מטופלים",
     "appointments": "פגישות",
     "tasks": "משימות",
+    "files": "קבצים",
     "analytics": "אנליטיקה",
     "settings": "הגדרות"
+  },
+  "fileViewer": {
+    "previewUnavailable": "אין תצוגה מקדימה זמינה עבור סוג קובץ זה.",
+    "download": "הורדה"
   },
   "table": {
     "searchPlaceholder": "חיפוש לפי שם, אימייל או טלפון",

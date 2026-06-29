@@ -6,6 +6,7 @@ import { AgentsPage, AgentDetailPage } from '@/features/agents'
 import { PatientsPage, PatientDetailPage } from '@/features/patients'
 import { AppointmentsPage } from '@/features/appointments'
 import { TasksPage } from '@/features/tasks'
+import { FilesPage } from '@/features/files'
 import { AnalyticsPage } from '@/features/analytics'
 import { RoleHome } from '@/features/home/RoleHome'
 import { SettingsPage } from '@/features/settings'
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
           {
             path: '/tasks',
             element: <TasksPage />,
+          },
+          {
+            path: '/files',
+            element: <FilesPage />,
           },
           {
             path: '/analytics',

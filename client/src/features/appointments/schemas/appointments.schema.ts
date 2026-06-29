@@ -4,7 +4,7 @@ import type { TFunction } from 'i18next'
 export function createAppointmentSchema(t: TFunction) {
   return z.object({
     patientId: z.coerce
-      .number({ invalid_type_error: t('appointments:validation.patientRequired') })
+      .number({ error: t('appointments:validation.patientRequired') })
       .int()
       .positive(t('appointments:validation.patientRequired')),
     scheduledAt: z.string().min(1, t('appointments:validation.scheduledAtRequired')),

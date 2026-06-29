@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { env } from '../../lib/env';
 import { AppError } from '../errors/AppError';
 import { AUTH_COOKIE_NAME } from '../utils/cookie';
 
@@ -25,14 +26,8 @@ export function authenticate(req: Request, _res: Response, next: NextFunction): 
     return;
   }
 
-  const secret = process.env['JWT_SECRET'];
-  if (!secret) {
-    next(new Error('JWT_SECRET is not configured'));
-    return;
-  }
-
   try {
-    const payload = jwt.verify(token, secret) as JwtPayload;
+    const payload = jwt.verify(token, env.jwtSecret) as JwtPayload;
     req.currentUser = payload;
     next();
   } catch {
