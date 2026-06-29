@@ -1,13 +1,12 @@
 import type { CookieOptions } from 'express';
+import { env } from '../../lib/env';
 
 export const AUTH_COOKIE_NAME = 'token';
 
-const isProd = process.env['NODE_ENV'] === 'production';
-
 export const AUTH_COOKIE_OPTIONS: CookieOptions = {
   httpOnly: true,
-  secure: isProd,
-  sameSite: isProd ? 'strict' : 'lax',
+  secure: env.isProd,
+  sameSite: env.isProd ? 'strict' : 'lax',
   maxAge: 8 * 60 * 60 * 1000, // 8 hours
   path: '/',
 };

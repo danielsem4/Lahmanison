@@ -12,7 +12,7 @@ export function createPatientSchema(t: TFunction) {
       .max(200),
     phone: z.string().min(1, t('patients:validation.phoneRequired')).max(40),
     age: z.coerce
-      .number({ invalid_type_error: t('patients:validation.ageInvalid') })
+      .number({ error: t('patients:validation.ageInvalid') })
       .int(t('patients:validation.ageInvalid'))
       .min(0, t('patients:validation.ageInvalid'))
       .max(150, t('patients:validation.ageInvalid')),

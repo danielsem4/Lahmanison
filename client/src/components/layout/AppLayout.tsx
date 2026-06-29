@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import {
   BarChart3,
   CalendarDays,
+  FolderOpen,
   LayoutDashboard,
   LayoutList,
   ListChecks,
@@ -42,6 +43,7 @@ export function AppLayout() {
   if (user?.role === 'MANAGER') {
     navItems.push(
       { label: t('nav.patients'), path: '/patients', icon: UserRound },
+      { label: t('nav.files'), path: '/files', icon: FolderOpen },
       { label: t('nav.analytics'), path: '/analytics', icon: BarChart3 },
     )
   }
@@ -52,6 +54,7 @@ export function AppLayout() {
       { label: t('nav.patients'), path: '/patients', icon: UserRound },
       { label: t('nav.appointments'), path: '/appointments', icon: CalendarDays },
       { label: t('nav.tasks'), path: '/tasks', icon: ListChecks },
+      { label: t('nav.files'), path: '/files', icon: FolderOpen },
     )
   }
 

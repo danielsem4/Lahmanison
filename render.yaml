@@ -1,0 +1,40 @@
+# Render Blueprint: a Dockerized web service + managed Postgres.
+# Render's filesystem is ephemeral, so STORAGE_DRIVER is set to s3 — fill the
+# S3_* values (Cloudflare R2 recommended) in the Render dashboard after the
+# first deploy (they are marked sync:false so they are not stored in git).
+databases:
+  - name: lahmanison-db
+    databaseName: lahmanison
+    plan: free
+
+services:
+  - type: web
+    name: lahmanison
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lahmanison-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: STORAGE_DRIVER
+        value: s3
+      - key: S3_BUCKET
+        sync: false
+      - key: S3_REGION
+        sync: false
+      - key: S3_ENDPOINT
+        sync: false
+      - key: S3_ACCESS_KEY_ID
+        sync: false
+      - key: S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: S3_FORCE_PATH_STYLE
+        value: 'false'

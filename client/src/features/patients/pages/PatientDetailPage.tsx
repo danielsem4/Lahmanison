@@ -41,7 +41,7 @@ import {
 } from '@/features/appointments'
 import type { AppointmentFormData } from '@/features/appointments/schemas/appointments.schema'
 import { PatientFormDialog } from '../components/PatientFormDialog'
-import { FileViewerDialog } from '../components/FileViewerDialog'
+import { FileViewerDialog } from '@/components/shared/FileViewerDialog'
 import { PatientStatusBadge } from '../components/PatientStatusBadge'
 import {
   usePatient,
@@ -51,7 +51,7 @@ import {
   useUploadPatientFile,
   useDeletePatientFile,
 } from '../hooks/usePatients'
-import { patientFileDownloadUrl } from '../api/patients.api'
+import { patientFileDownloadUrl, patientFileViewUrl } from '../api/patients.api'
 import type { Patient, PatientFile } from '../types/patients.types'
 import type { PatientFormData } from '../schemas/patients.schema'
 
@@ -394,7 +394,8 @@ export function PatientDetailPage() {
 
       <FileViewerDialog
         file={fileToView}
-        patientId={patientId}
+        viewUrl={fileToView ? patientFileViewUrl(patientId, fileToView.id) : null}
+        downloadUrl={fileToView ? patientFileDownloadUrl(patientId, fileToView.id) : null}
         onOpenChange={(open) => !open && setFileToView(null)}
       />
     </div>

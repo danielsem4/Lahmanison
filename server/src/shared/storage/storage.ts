@@ -1,4 +1,6 @@
+import { env } from '../../lib/env';
 import { LocalFileStorage } from './localStorage';
+import { S3FileStorage } from './s3Storage';
 
 /**
  * Storage-agnostic file persistence. The rest of the app depends only on this
@@ -13,7 +15,9 @@ export interface FileStorage {
 }
 
 function createStorage(): FileStorage {
-  // When ready for S3: `if (process.env['STORAGE_DRIVER'] === 's3') return new S3FileStorage(...)`
+  if (env.storageDriver === 's3') {
+    return new S3FileStorage();
+  }
   return new LocalFileStorage();
 }
 

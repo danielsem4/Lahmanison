@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { env } from '../../lib/env';
 import { AppError } from '../../shared/errors/AppError';
 import type { IAuthRepository } from './auth.repository';
 import type { ChangePasswordDto, LoginDto } from './auth.schema';
@@ -16,12 +17,6 @@ export interface UserShape {
 interface LoginResult {
   token: string;
   user: UserShape;
-}
-
-function getJwtSecret(): string {
-  const secret = process.env['JWT_SECRET'];
-  if (!secret) throw new Error('JWT_SECRET is not configured');
-  return secret;
 }
 
 function toUserShape(user: { id: number; email: string; name: string | null; role: string }): UserShape {
@@ -47,7 +42,7 @@ export class AuthService {
       throw new AppError('Invalid email or password', 401);
     }
 
-    const token = jwt.sign({ userId: user.id, role: user.role }, getJwtSecret(), {
+    const token = jwt.sign({ userId: user.id, role: user.role }, env.jwtSecret, {
       expiresIn: '8h',
     });
 
