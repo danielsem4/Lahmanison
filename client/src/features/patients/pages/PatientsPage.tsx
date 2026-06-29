@@ -25,6 +25,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
+import { formatDateTime } from '@/features/appointments'
 import { PatientFormDialog } from '../components/PatientFormDialog'
 import { PatientStatusBadge } from '../components/PatientStatusBadge'
 import {
@@ -42,7 +43,7 @@ function displayName(patient: Patient): string {
 }
 
 export function PatientsPage() {
-  const { t } = useTranslation('patients')
+  const { t, i18n } = useTranslation('patients')
   const navigate = useNavigate()
   const { data: patients, isLoading } = usePatients()
   const createPatient = useCreatePatient()
@@ -59,6 +60,7 @@ export function PatientsPage() {
         phone: (p) => p.phone,
         age: (p) => p.age,
         status: (p) => p.status,
+        nextMeeting: (p) => p.nextAppointment?.scheduledAt ?? null,
       },
     },
   )
@@ -180,6 +182,15 @@ export function PatientsPage() {
                   >
                     {t('table.status')}
                   </SortableTableHead>
+                  <SortableTableHead
+                    sortKey="nextMeeting"
+                    activeKey={sortKey}
+                    direction={sortDirection}
+                    onSort={toggleSort}
+                    align="center"
+                  >
+                    {t('table.nextMeeting')}
+                  </SortableTableHead>
                   <TableHead className="text-center">{t('table.actions')}</TableHead>
                 </TableRow>
               </TableHeader>
@@ -200,7 +211,7 @@ export function PatientsPage() {
                     </TableCell>
                     <TableCell className="text-center">
                       <div className="flex justify-center">
-                        {patient.hasImage ? (
+                        {patient.hasFiles ? (
                           <Check className="size-4 text-primary" aria-label={t('yes')} />
                         ) : (
                           <Minus className="size-4 text-muted-foreground" aria-label={t('no')} />
@@ -211,6 +222,11 @@ export function PatientsPage() {
                       <div className="flex justify-center">
                         <PatientStatusBadge status={patient.status} />
                       </div>
+                    </TableCell>
+                    <TableCell className="text-center text-muted-foreground">
+                      {patient.nextAppointment
+                        ? formatDateTime(patient.nextAppointment.scheduledAt, i18n.language)
+                        : '—'}
                     </TableCell>
                     <TableCell className="text-center">
                       <div className="flex justify-center gap-1">

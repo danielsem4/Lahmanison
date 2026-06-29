@@ -1,0 +1,29 @@
+{
+  "title": "Welcome, {{name}}",
+  "subtitle": "Your patients, appointments and follow-ups at a glance.",
+  "viewAll": "View all",
+  "stats": {
+    "myPatients": "My patients",
+    "inTreatment": "In treatment",
+    "upcomingAppointments": "Upcoming appointments",
+    "openTasks": "Open tasks"
+  },
+  "actions": {
+    "addPatient": "Add patient",
+    "scheduleAppointment": "Schedule appointment",
+    "addTask": "Add task"
+  },
+  "upcoming": {
+    "title": "Upcoming appointments",
+    "empty": "No upcoming appointments.",
+    "patient": "Patient",
+    "when": "When",
+    "status": "Status"
+  },
+  "tasks": {
+    "title": "Open tasks",
+    "empty": "No open tasks.",
+    "task": "Task",
+    "patient": "Patient"
+  }
+}

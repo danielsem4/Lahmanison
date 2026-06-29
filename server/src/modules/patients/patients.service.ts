@@ -2,6 +2,7 @@ import { AppError } from '../../shared/errors/AppError';
 import type {
   IPatientsRepository,
   PatientRecord,
+  PatientListRecord,
   UpdatePatientData,
 } from './patients.repository';
 import type { CreatePatientDto, UpdatePatientDto } from './patients.schema';
@@ -9,7 +10,7 @@ import type { CreatePatientDto, UpdatePatientDto } from './patients.schema';
 export class PatientsService {
   constructor(private readonly repository: IPatientsRepository) {}
 
-  async getAll(): Promise<PatientRecord[]> {
+  async getAll(): Promise<PatientListRecord[]> {
     return this.repository.findAll();
   }
 

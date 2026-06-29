@@ -1,0 +1,29 @@
+{
+  "title": "ברוך הבא, {{name}}",
+  "subtitle": "המטופלים, הפגישות והמשימות שלך במבט אחד.",
+  "viewAll": "הצג הכל",
+  "stats": {
+    "myPatients": "המטופלים שלי",
+    "inTreatment": "בטיפול",
+    "upcomingAppointments": "פגישות קרובות",
+    "openTasks": "משימות פתוחות"
+  },
+  "actions": {
+    "addPatient": "הוספת מטופל",
+    "scheduleAppointment": "קביעת פגישה",
+    "addTask": "הוספת משימה"
+  },
+  "upcoming": {
+    "title": "פגישות קרובות",
+    "empty": "אין פגישות קרובות.",
+    "patient": "מטופל",
+    "when": "מתי",
+    "status": "סטטוס"
+  },
+  "tasks": {
+    "title": "משימות פתוחות",
+    "empty": "אין משימות פתוחות.",
+    "task": "משימה",
+    "patient": "מטופל"
+  }
+}

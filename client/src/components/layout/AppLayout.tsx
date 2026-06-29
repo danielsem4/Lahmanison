@@ -1,6 +1,15 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { BarChart3, LayoutList, Settings, UserRound, Users } from 'lucide-react'
+import {
+  BarChart3,
+  CalendarDays,
+  LayoutDashboard,
+  LayoutList,
+  ListChecks,
+  Settings,
+  UserRound,
+  Users,
+} from 'lucide-react'
 import { AppSidebar } from '@/components/layout/Sidebar'
 import { SidebarProvider, SidebarInset, SidebarTrigger } from '@/components/ui/sidebar'
 import { useAuth } from '@/features/auth'
@@ -21,6 +30,8 @@ export function AppLayout() {
     homeNavItem = { label: t('nav.managers'), path: '/', icon: Users }
   } else if (user?.role === 'MANAGER') {
     homeNavItem = { label: t('nav.agents'), path: '/', icon: Users }
+  } else if (user?.role === 'AGENT') {
+    homeNavItem = { label: t('nav.dashboard'), path: '/', icon: LayoutDashboard }
   } else {
     homeNavItem = { label: t('nav.items'), path: '/', icon: LayoutList }
   }
@@ -32,6 +43,15 @@ export function AppLayout() {
     navItems.push(
       { label: t('nav.patients'), path: '/patients', icon: UserRound },
       { label: t('nav.analytics'), path: '/analytics', icon: BarChart3 },
+    )
+  }
+
+  // Agents work out of a patients/appointments/tasks workspace.
+  if (user?.role === 'AGENT') {
+    navItems.push(
+      { label: t('nav.patients'), path: '/patients', icon: UserRound },
+      { label: t('nav.appointments'), path: '/appointments', icon: CalendarDays },
+      { label: t('nav.tasks'), path: '/tasks', icon: ListChecks },
     )
   }
 

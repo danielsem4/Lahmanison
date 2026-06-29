@@ -13,6 +13,7 @@
     "age": "גיל",
     "hasImage": "יש תמונה",
     "status": "סטטוס",
+    "nextMeeting": "פגישה הבאה",
     "actions": "פעולות"
   },
   "status": {
@@ -43,7 +44,22 @@
   "detail": {
     "back": "חזרה",
     "detailsTitle": "פרטים",
-    "notFound": "המטופל לא נמצא."
+    "notFound": "המטופל לא נמצא.",
+    "filesTitle": "קבצים",
+    "uploadFile": "העלאת קובץ",
+    "uploading": "מעלה…",
+    "noFiles": "לא הועלו עדיין קבצים.",
+    "fileName": "שם",
+    "fileSize": "גודל",
+    "uploadedAt": "הועלה",
+    "download": "הורדה",
+    "view": "צפייה",
+    "previewUnavailable": "אין תצוגה מקדימה זמינה לסוג קובץ זה.",
+    "deleteFileTitle": "מחיקת קובץ",
+    "deleteFileDescription": "לא ניתן לבטל פעולה זו.",
+    "appointmentsTitle": "פגישות ושיחות",
+    "schedule": "קביעה",
+    "noAppointments": "לא נקבעו עדיין פגישות או שיחות."
   },
   "delete": {
     "title": "מחיקת מטופל",
@@ -63,6 +79,8 @@
     "created": "המטופל נוצר",
     "updated": "המטופל עודכן",
     "deleted": "המטופל נמחק",
+    "fileUploaded": "הקובץ הועלה",
+    "fileDeleted": "הקובץ נמחק",
     "error": "משהו השתבש"
   }
 }

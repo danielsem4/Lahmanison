@@ -1,0 +1,53 @@
+{
+  "title": "משימות",
+  "subtitle": "מעקב אחר משימות והמשך טיפול.",
+  "addTask": "הוספת משימה",
+  "searchPlaceholder": "חיפוש לפי כותרת או מטופל",
+  "listTitle": "משימות ({{count}})",
+  "empty": "אין עדיין משימות. הוסף את הראשונה.",
+  "table": {
+    "done": "בוצע",
+    "title": "כותרת",
+    "patient": "מטופל",
+    "dueDate": "תאריך יעד",
+    "status": "סטטוס",
+    "actions": "פעולות"
+  },
+  "status": {
+    "OPEN": "פתוחה",
+    "DONE": "הושלמה"
+  },
+  "form": {
+    "createTitle": "הוספת משימה",
+    "editTitle": "עריכת משימה",
+    "description": "מלא את פרטי המשימה למטה.",
+    "titleLabel": "כותרת",
+    "descriptionLabel": "תיאור",
+    "dueDateLabel": "תאריך יעד",
+    "statusLabel": "סטטוס",
+    "patientLabel": "מטופל קשור",
+    "patientNone": "ללא",
+    "cancel": "ביטול",
+    "save": "שמירה"
+  },
+  "validation": {
+    "titleRequired": "יש להזין כותרת"
+  },
+  "actions": {
+    "toggle": "סימון כהושלם",
+    "edit": "עריכה",
+    "delete": "מחיקה"
+  },
+  "delete": {
+    "title": "מחיקת משימה",
+    "description": "לא ניתן לבטל פעולה זו.",
+    "cancel": "ביטול",
+    "confirm": "מחיקה"
+  },
+  "toast": {
+    "created": "המשימה נוצרה",
+    "updated": "המשימה עודכנה",
+    "deleted": "המשימה נמחקה",
+    "error": "משהו השתבש"
+  }
+}

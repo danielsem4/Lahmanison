@@ -1,10 +1,27 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { ArrowLeft, Pencil, Trash2, Loader2 } from 'lucide-react'
+import {
+  ArrowLeft,
+  Pencil,
+  Trash2,
+  Loader2,
+  Upload,
+  Download,
+  Eye,
+  Plus,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,10 +32,27 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
+import {
+  AppointmentFormDialog,
+  AppointmentStatusBadge,
+  useAppointments,
+  useCreateAppointment,
+  formatDateTime,
+} from '@/features/appointments'
+import type { AppointmentFormData } from '@/features/appointments/schemas/appointments.schema'
 import { PatientFormDialog } from '../components/PatientFormDialog'
+import { FileViewerDialog } from '../components/FileViewerDialog'
 import { PatientStatusBadge } from '../components/PatientStatusBadge'
-import { usePatient, useUpdatePatient, useDeletePatient } from '../hooks/usePatients'
-import type { Patient } from '../types/patients.types'
+import {
+  usePatient,
+  useUpdatePatient,
+  useDeletePatient,
+  usePatientFiles,
+  useUploadPatientFile,
+  useDeletePatientFile,
+} from '../hooks/usePatients'
+import { patientFileDownloadUrl } from '../api/patients.api'
+import type { Patient, PatientFile } from '../types/patients.types'
 import type { PatientFormData } from '../schemas/patients.schema'
 
 function fullName(patient: Patient): string {
@@ -26,8 +60,14 @@ function fullName(patient: Patient): string {
   return name || patient.name || '—'
 }
 
+function formatSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
+
 export function PatientDetailPage() {
-  const { t } = useTranslation('patients')
+  const { t, i18n } = useTranslation('patients')
   const { id } = useParams()
   const navigate = useNavigate()
   const patientId = Number(id)
@@ -36,8 +76,20 @@ export function PatientDetailPage() {
   const updatePatient = useUpdatePatient()
   const deletePatient = useDeletePatient()
 
+  const { data: files, isLoading: filesLoading } = usePatientFiles(patientId)
+  const uploadFile = useUploadPatientFile(patientId)
+  const deleteFile = useDeletePatientFile(patientId)
+
+  const { data: appointments, isLoading: appointmentsLoading } = useAppointments(patientId)
+  const createAppointment = useCreateAppointment()
+
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
   const [formOpen, setFormOpen] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
+  const [scheduleOpen, setScheduleOpen] = useState(false)
+  const [fileToDelete, setFileToDelete] = useState<PatientFile | null>(null)
+  const [fileToView, setFileToView] = useState<PatientFile | null>(null)
 
   function handleSubmit(data: PatientFormData) {
     updatePatient.mutate({ id: patientId, data }, { onSuccess: () => setFormOpen(false) })
@@ -45,6 +97,22 @@ export function PatientDetailPage() {
 
   function confirmDelete() {
     deletePatient.mutate(patientId, { onSuccess: () => navigate('/patients') })
+  }
+
+  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0]
+    if (file) uploadFile.mutate(file)
+    // Reset so selecting the same file again still fires onChange.
+    event.target.value = ''
+  }
+
+  function confirmFileDelete() {
+    if (!fileToDelete) return
+    deleteFile.mutate(fileToDelete.id, { onSuccess: () => setFileToDelete(null) })
+  }
+
+  function handleSchedule(data: AppointmentFormData) {
+    createAppointment.mutate(data, { onSuccess: () => setScheduleOpen(false) })
   }
 
   if (isLoading) {
@@ -136,12 +204,163 @@ export function PatientDetailPage() {
         </CardContent>
       </Card>
 
+      {/* Files */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between gap-4">
+          <CardTitle>{t('detail.filesTitle')}</CardTitle>
+          <input
+            ref={fileInputRef}
+            type="file"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploadFile.isPending}
+          >
+            {uploadFile.isPending ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Upload className="size-4" />
+            )}
+            {uploadFile.isPending ? t('detail.uploading') : t('detail.uploadFile')}
+          </Button>
+        </CardHeader>
+        <CardContent>
+          {filesLoading ? (
+            <div className="flex justify-center py-8">
+              <Loader2 className="size-6 animate-spin text-muted-foreground" />
+            </div>
+          ) : !files || files.length === 0 ? (
+            <p className="py-8 text-center text-muted-foreground">{t('detail.noFiles')}</p>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50">
+                  <TableHead>{t('detail.fileName')}</TableHead>
+                  <TableHead className="text-center">{t('detail.fileSize')}</TableHead>
+                  <TableHead className="text-center">{t('detail.uploadedAt')}</TableHead>
+                  <TableHead className="text-center">{t('table.actions')}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {files.map((file) => (
+                  <TableRow key={file.id}>
+                    <TableCell className="font-medium">{file.fileName}</TableCell>
+                    <TableCell className="text-center text-muted-foreground">
+                      {formatSize(file.size)}
+                    </TableCell>
+                    <TableCell className="text-center text-muted-foreground">
+                      {formatDateTime(file.createdAt, i18n.language)}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <div className="flex justify-center gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label={t('detail.view')}
+                          onClick={() => setFileToView(file)}
+                        >
+                          <Eye className="size-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label={t('detail.download')}
+                          onClick={() =>
+                            window.open(patientFileDownloadUrl(patientId, file.id), '_blank')
+                          }
+                        >
+                          <Download className="size-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon-sm"
+                          aria-label={t('actions.delete')}
+                          className="text-destructive hover:text-destructive"
+                          onClick={() => setFileToDelete(file)}
+                        >
+                          <Trash2 className="size-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Meetings & calls */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between gap-4">
+          <CardTitle>{t('detail.appointmentsTitle')}</CardTitle>
+          <Button variant="outline" size="sm" onClick={() => setScheduleOpen(true)}>
+            <Plus className="size-4" />
+            {t('detail.schedule')}
+          </Button>
+        </CardHeader>
+        <CardContent>
+          {appointmentsLoading ? (
+            <div className="flex justify-center py-8">
+              <Loader2 className="size-6 animate-spin text-muted-foreground" />
+            </div>
+          ) : !appointments || appointments.length === 0 ? (
+            <p className="py-8 text-center text-muted-foreground">
+              {t('detail.noAppointments')}
+            </p>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50">
+                  <TableHead>{t('appointments:table.scheduledAt')}</TableHead>
+                  <TableHead className="text-center">{t('appointments:table.type')}</TableHead>
+                  <TableHead className="text-center">{t('appointments:table.status')}</TableHead>
+                  <TableHead className="text-center">{t('appointments:table.note')}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {appointments.map((appointment) => (
+                  <TableRow key={appointment.id}>
+                    <TableCell className="font-medium">
+                      {formatDateTime(appointment.scheduledAt, i18n.language)}
+                    </TableCell>
+                    <TableCell className="text-center text-muted-foreground">
+                      {t(`appointments:type.${appointment.type}`)}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <div className="flex justify-center">
+                        <AppointmentStatusBadge status={appointment.status} />
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-center text-muted-foreground">
+                      {appointment.note || '—'}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </CardContent>
+      </Card>
+
       <PatientFormDialog
         open={formOpen}
         onOpenChange={setFormOpen}
         patient={patient}
         onSubmit={handleSubmit}
         isPending={updatePatient.isPending}
+      />
+
+      <AppointmentFormDialog
+        open={scheduleOpen}
+        onOpenChange={setScheduleOpen}
+        lockedPatientId={patientId}
+        onSubmit={handleSchedule}
+        isPending={createAppointment.isPending}
       />
 
       <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
@@ -156,6 +375,28 @@ export function PatientDetailPage() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <AlertDialog
+        open={!!fileToDelete}
+        onOpenChange={(open) => !open && setFileToDelete(null)}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('detail.deleteFileTitle')}</AlertDialogTitle>
+            <AlertDialogDescription>{t('detail.deleteFileDescription')}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t('delete.cancel')}</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmFileDelete}>{t('delete.confirm')}</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <FileViewerDialog
+        file={fileToView}
+        patientId={patientId}
+        onOpenChange={(open) => !open && setFileToView(null)}
+      />
     </div>
   )
 }

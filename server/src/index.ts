@@ -10,6 +10,9 @@ import { itemsRouter } from './modules/items/items.routes';
 import { managersRouter } from './modules/managers/managers.routes';
 import { agentsRouter } from './modules/agents/agents.routes';
 import { patientsRouter } from './modules/patients/patients.routes';
+import { patientFilesRouter } from './modules/files/files.routes';
+import { appointmentsRouter } from './modules/appointments/appointments.routes';
+import { tasksRouter } from './modules/tasks/tasks.routes';
 import { errorHandler } from './shared/middlewares/errorHandler';
 
 const app = express();
@@ -38,6 +41,11 @@ app.use('/api/items', itemsRouter);
 app.use('/api/managers', managersRouter);
 app.use('/api/agents', agentsRouter);
 app.use('/api/patients', patientsRouter);
+// Nested patient-file routes (/:patientId/files). Mounted after patientsRouter,
+// whose single-segment routes (/:id) do not match the two-segment file paths.
+app.use('/api/patients', patientFilesRouter);
+app.use('/api/appointments', appointmentsRouter);
+app.use('/api/tasks', tasksRouter);
 
 // Error handler (must be last)
 app.use(errorHandler);

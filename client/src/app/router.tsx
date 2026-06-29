@@ -4,6 +4,8 @@ import { ItemsPage } from '@/features/items'
 import { ManagersPage } from '@/features/managers'
 import { AgentsPage, AgentDetailPage } from '@/features/agents'
 import { PatientsPage, PatientDetailPage } from '@/features/patients'
+import { AppointmentsPage } from '@/features/appointments'
+import { TasksPage } from '@/features/tasks'
 import { AnalyticsPage } from '@/features/analytics'
 import { RoleHome } from '@/features/home/RoleHome'
 import { SettingsPage } from '@/features/settings'
@@ -51,6 +53,14 @@ export const router = createBrowserRouter([
           {
             path: '/patients/:id',
             element: <PatientDetailPage />,
+          },
+          {
+            path: '/appointments',
+            element: <AppointmentsPage />,
+          },
+          {
+            path: '/tasks',
+            element: <TasksPage />,
           },
           {
             path: '/analytics',
