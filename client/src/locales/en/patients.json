@@ -13,6 +13,7 @@
     "age": "Age",
     "hasImage": "Have image",
     "status": "Status",
+    "nextMeeting": "Next meeting",
     "actions": "Actions"
   },
   "status": {
@@ -43,7 +44,22 @@
   "detail": {
     "back": "Back",
     "detailsTitle": "Details",
-    "notFound": "Patient not found."
+    "notFound": "Patient not found.",
+    "filesTitle": "Files",
+    "uploadFile": "Upload file",
+    "uploading": "Uploading…",
+    "noFiles": "No files uploaded yet.",
+    "fileName": "Name",
+    "fileSize": "Size",
+    "uploadedAt": "Uploaded",
+    "download": "Download",
+    "view": "View",
+    "previewUnavailable": "Preview not available for this file type.",
+    "deleteFileTitle": "Delete file",
+    "deleteFileDescription": "This action cannot be undone.",
+    "appointmentsTitle": "Meetings & calls",
+    "schedule": "Schedule",
+    "noAppointments": "No meetings or calls scheduled yet."
   },
   "delete": {
     "title": "Delete patient",
@@ -63,6 +79,8 @@
     "created": "Patient created",
     "updated": "Patient updated",
     "deleted": "Patient deleted",
+    "fileUploaded": "File uploaded",
+    "fileDeleted": "File deleted",
     "error": "Something went wrong"
   }
 }

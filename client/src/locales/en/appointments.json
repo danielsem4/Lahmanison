@@ -1,0 +1,58 @@
+{
+  "title": "Appointments",
+  "subtitle": "Schedule and track patient appointments.",
+  "addAppointment": "Schedule appointment",
+  "searchPlaceholder": "Search by patient or note",
+  "listTitle": "Appointments ({{count}})",
+  "empty": "No appointments yet. Schedule your first one.",
+  "table": {
+    "patient": "Patient",
+    "scheduledAt": "Date & time",
+    "type": "Type",
+    "status": "Status",
+    "note": "Note",
+    "actions": "Actions"
+  },
+  "status": {
+    "SCHEDULED": "Scheduled",
+    "COMPLETED": "Completed",
+    "CANCELLED": "Cancelled"
+  },
+  "type": {
+    "MEETING": "Meeting",
+    "PHONE_CALL": "Phone call"
+  },
+  "form": {
+    "createTitle": "Schedule appointment",
+    "editTitle": "Edit appointment",
+    "description": "Fill in the appointment details below.",
+    "patientLabel": "Patient",
+    "patientPlaceholder": "Select a patient",
+    "scheduledAtLabel": "Date & time",
+    "typeLabel": "Type",
+    "statusLabel": "Status",
+    "noteLabel": "Note",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "validation": {
+    "patientRequired": "A patient is required",
+    "scheduledAtRequired": "A date and time is required"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "delete": {
+    "title": "Delete appointment",
+    "description": "This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Delete"
+  },
+  "toast": {
+    "created": "Appointment scheduled",
+    "updated": "Appointment updated",
+    "deleted": "Appointment deleted",
+    "error": "Something went wrong"
+  }
+}

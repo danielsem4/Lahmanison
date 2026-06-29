@@ -4,7 +4,10 @@
     "items": "פריטים",
     "managers": "מנהלים",
     "agents": "סוכנים",
+    "dashboard": "לוח בקרה",
     "patients": "מטופלים",
+    "appointments": "פגישות",
+    "tasks": "משימות",
     "analytics": "אנליטיקה",
     "settings": "הגדרות"
   },

@@ -4,7 +4,10 @@
     "items": "Items",
     "managers": "Managers",
     "agents": "Agents",
+    "dashboard": "Dashboard",
     "patients": "Patients",
+    "appointments": "Appointments",
+    "tasks": "Tasks",
     "analytics": "Analytics",
     "settings": "Settings"
   },

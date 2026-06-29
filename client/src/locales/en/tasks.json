@@ -1,0 +1,53 @@
+{
+  "title": "Tasks",
+  "subtitle": "Track follow-ups and to-dos.",
+  "addTask": "Add task",
+  "searchPlaceholder": "Search by title or patient",
+  "listTitle": "Tasks ({{count}})",
+  "empty": "No tasks yet. Add your first one.",
+  "table": {
+    "done": "Done",
+    "title": "Title",
+    "patient": "Patient",
+    "dueDate": "Due date",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "status": {
+    "OPEN": "Open",
+    "DONE": "Done"
+  },
+  "form": {
+    "createTitle": "Add task",
+    "editTitle": "Edit task",
+    "description": "Fill in the task details below.",
+    "titleLabel": "Title",
+    "descriptionLabel": "Description",
+    "dueDateLabel": "Due date",
+    "statusLabel": "Status",
+    "patientLabel": "Related patient",
+    "patientNone": "None",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "validation": {
+    "titleRequired": "Title is required"
+  },
+  "actions": {
+    "toggle": "Toggle complete",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "delete": {
+    "title": "Delete task",
+    "description": "This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Delete"
+  },
+  "toast": {
+    "created": "Task created",
+    "updated": "Task updated",
+    "deleted": "Task deleted",
+    "error": "Something went wrong"
+  }
+}

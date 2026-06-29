@@ -22,6 +22,22 @@ enum PatientStatus {
   DISCHARGED
 }
 
+enum AppointmentStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum AppointmentType {
+  MEETING
+  PHONE_CALL
+}
+
+enum TaskStatus {
+  OPEN
+  DONE
+}
+
 // ─── User ────────────────────────────────────────────────
 
 model User {
@@ -35,8 +51,11 @@ model User {
   role         Role    @default(AGENT)
   isActive     Boolean @default(true)
 
-  items           Item[]
-  createdPatients Patient[] @relation("PatientCreator")
+  items               Item[]
+  createdPatients     Patient[]     @relation("PatientCreator")
+  createdAppointments Appointment[] @relation("AppointmentCreator")
+  createdTasks        Task[]        @relation("TaskCreator")
+  uploadedFiles       PatientFile[] @relation("FileUploader")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -77,8 +96,80 @@ model Patient {
   createdById Int?
   createdBy   User? @relation("PatientCreator", fields: [createdById], references: [id], onDelete: SetNull)
 
+  appointments Appointment[]
+  tasks        Task[]
+  files        PatientFile[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([createdById])
+}
+
+// ─── Appointment ─────────────────────────────────────────
+
+model Appointment {
+  id          Int               @id @default(autoincrement())
+  patientId   Int
+  patient     Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  scheduledAt DateTime
+  type        AppointmentType   @default(MEETING)
+  status      AppointmentStatus @default(SCHEDULED)
+  note        String? // free-text detail
+
+  // The user (typically an AGENT) who scheduled this appointment.
+  createdById Int?
+  createdBy   User? @relation("AppointmentCreator", fields: [createdById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([patientId])
+  @@index([createdById])
+}
+
+// ─── Task (follow-up) ────────────────────────────────────
+
+model Task {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  dueDate     DateTime?
+  status      TaskStatus @default(OPEN)
+
+  // Optional patient this task relates to.
+  patientId Int?
+  patient   Patient? @relation(fields: [patientId], references: [id], onDelete: SetNull)
+
+  // The user (typically an AGENT) who created this task.
+  createdById Int?
+  createdBy   User? @relation("TaskCreator", fields: [createdById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([patientId])
+  @@index([createdById])
+}
+
+// ─── PatientFile (uploaded documents) ────────────────────
+
+model PatientFile {
+  id        Int     @id @default(autoincrement())
+  patientId Int
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  fileName   String // original name shown to the user
+  storageKey String // adapter-relative key (local: "patients/<id>/<uuid>")
+  mimeType   String
+  size       Int // bytes
+
+  // The user who uploaded the file. Nullable so files survive if the uploader is deleted.
+  uploadedById Int?
+  uploadedBy   User? @relation("FileUploader", fields: [uploadedById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@index([patientId])
+  @@index([uploadedById])
 }

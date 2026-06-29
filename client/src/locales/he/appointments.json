@@ -1,0 +1,58 @@
+{
+  "title": "פגישות",
+  "subtitle": "קביעה ומעקב אחר פגישות מטופלים.",
+  "addAppointment": "קביעת פגישה",
+  "searchPlaceholder": "חיפוש לפי מטופל או הערה",
+  "listTitle": "פגישות ({{count}})",
+  "empty": "אין עדיין פגישות. קבע את הפגישה הראשונה.",
+  "table": {
+    "patient": "מטופל",
+    "scheduledAt": "תאריך ושעה",
+    "type": "סוג",
+    "status": "סטטוס",
+    "note": "הערה",
+    "actions": "פעולות"
+  },
+  "status": {
+    "SCHEDULED": "מתוזמן",
+    "COMPLETED": "הושלם",
+    "CANCELLED": "בוטל"
+  },
+  "type": {
+    "MEETING": "פגישה",
+    "PHONE_CALL": "שיחת טלפון"
+  },
+  "form": {
+    "createTitle": "קביעת פגישה",
+    "editTitle": "עריכת פגישה",
+    "description": "מלא את פרטי הפגישה למטה.",
+    "patientLabel": "מטופל",
+    "patientPlaceholder": "בחר מטופל",
+    "scheduledAtLabel": "תאריך ושעה",
+    "typeLabel": "סוג",
+    "statusLabel": "סטטוס",
+    "noteLabel": "הערה",
+    "cancel": "ביטול",
+    "save": "שמירה"
+  },
+  "validation": {
+    "patientRequired": "יש לבחור מטופל",
+    "scheduledAtRequired": "יש להזין תאריך ושעה"
+  },
+  "actions": {
+    "edit": "עריכה",
+    "delete": "מחיקה"
+  },
+  "delete": {
+    "title": "מחיקת פגישה",
+    "description": "לא ניתן לבטל פעולה זו.",
+    "cancel": "ביטול",
+    "confirm": "מחיקה"
+  },
+  "toast": {
+    "created": "הפגישה נקבעה",
+    "updated": "הפגישה עודכנה",
+    "deleted": "הפגישה נמחקה",
+    "error": "משהו השתבש"
+  }
+}

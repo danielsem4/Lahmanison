@@ -8,10 +8,14 @@ import {
   createPatient,
   updatePatient,
   deletePatient,
+  getPatientFiles,
+  uploadPatientFile,
+  deletePatientFile,
 } from '../api/patients.api'
 import type { PatientFormData } from '../schemas/patients.schema'
 
 const patientsKey = ['patients'] as const
+const patientFilesKey = (id: number) => [...patientsKey, id, 'files'] as const
 
 function useErrorToast() {
   const { t } = useTranslation('patients')
@@ -76,6 +80,46 @@ export function useDeletePatient() {
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: patientsKey })
       toast.success(t('toast.deleted'))
+    },
+    onError,
+  })
+}
+
+// ─── Patient files ───────────────────────────────────────
+
+export function usePatientFiles(id: number) {
+  return useQuery({
+    queryKey: patientFilesKey(id),
+    queryFn: () => getPatientFiles(id),
+    enabled: id > 0,
+  })
+}
+
+export function useUploadPatientFile(patientId: number) {
+  const queryClient = useQueryClient()
+  const { t } = useTranslation('patients')
+  const onError = useErrorToast()
+
+  return useMutation({
+    mutationFn: (file: File) => uploadPatientFile(patientId, file),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: patientFilesKey(patientId) })
+      toast.success(t('toast.fileUploaded'))
+    },
+    onError,
+  })
+}
+
+export function useDeletePatientFile(patientId: number) {
+  const queryClient = useQueryClient()
+  const { t } = useTranslation('patients')
+  const onError = useErrorToast()
+
+  return useMutation({
+    mutationFn: (fileId: number) => deletePatientFile(patientId, fileId),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: patientFilesKey(patientId) })
+      toast.success(t('toast.fileDeleted'))
     },
     onError,
   })

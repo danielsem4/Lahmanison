@@ -1,16 +1,16 @@
 import { useAuth } from '@/features/auth'
 import { ManagersPage } from '@/features/managers'
 import { AgentsPage } from '@/features/agents'
+import { DashboardPage } from '@/features/dashboard'
 import { ItemsPage } from '@/features/items'
 
 /**
  * Renders the home screen based on the logged-in user's role.
  * - ADMIN   → table of managers
  * - MANAGER → table of agents
- * - AGENT   → (future) table of patients
+ * - AGENT   → workspace dashboard
  *
- * Until the agent view exists, agents fall back to the example items page as a
- * placeholder.
+ * Any other role falls back to the example items page as a placeholder.
  */
 export function RoleHome() {
   const { user } = useAuth()
@@ -21,6 +21,10 @@ export function RoleHome() {
 
   if (user?.role === 'MANAGER') {
     return <AgentsPage />
+  }
+
+  if (user?.role === 'AGENT') {
+    return <DashboardPage />
   }
 
   return <ItemsPage />
