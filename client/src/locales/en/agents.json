@@ -34,7 +34,21 @@
   "detail": {
     "back": "Back",
     "detailsTitle": "Details",
-    "notFound": "Agent not found."
+    "notFound": "Agent not found.",
+    "role": "Role",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "createdAt": "Created",
+    "patientsAdded": "Patients added",
+    "patientsInTreatment": "In treatment",
+    "patientsListTitle": "Patients created by this agent",
+    "noPatients": "This agent hasn't added any patients yet."
+  },
+  "roles": {
+    "ADMIN": "Admin",
+    "MANAGER": "Manager",
+    "AGENT": "Agent"
   },
   "credentials": {
     "title": "Agent created",

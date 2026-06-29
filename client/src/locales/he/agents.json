@@ -34,7 +34,21 @@
   "detail": {
     "back": "חזרה",
     "detailsTitle": "פרטים",
-    "notFound": "הסוכן לא נמצא."
+    "notFound": "הסוכן לא נמצא.",
+    "role": "תפקיד",
+    "status": "סטטוס",
+    "active": "פעיל",
+    "inactive": "לא פעיל",
+    "createdAt": "נוצר בתאריך",
+    "patientsAdded": "מטופלים שנוספו",
+    "patientsInTreatment": "בטיפול",
+    "patientsListTitle": "מטופלים שיצר סוכן זה",
+    "noPatients": "סוכן זה עדיין לא הוסיף מטופלים."
+  },
+  "roles": {
+    "ADMIN": "מנהל מערכת",
+    "MANAGER": "מנהל",
+    "AGENT": "סוכן"
   },
   "credentials": {
     "title": "הסוכן נוצר",

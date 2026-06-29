@@ -13,11 +13,22 @@ const controller = createPatientsController(service);
 
 export const patientsRouter = Router();
 
-// All patient routes require an authenticated MANAGER.
-patientsRouter.use(authenticate, authorize('MANAGER'));
+// All patient routes require authentication.
+patientsRouter.use(authenticate);
 
-patientsRouter.get('/', controller.getAll);
-patientsRouter.get('/:id', controller.getById);
-patientsRouter.post('/', validateRequest(createPatientSchema), controller.create);
-patientsRouter.patch('/:id', validateRequest(updatePatientSchema), controller.update);
-patientsRouter.delete('/:id', controller.remove);
+patientsRouter.get('/', authorize('MANAGER'), controller.getAll);
+patientsRouter.get('/:id', authorize('MANAGER'), controller.getById);
+// Agents may create patients too, so they are attributed as the creator.
+patientsRouter.post(
+  '/',
+  authorize('MANAGER', 'AGENT'),
+  validateRequest(createPatientSchema),
+  controller.create,
+);
+patientsRouter.patch(
+  '/:id',
+  authorize('MANAGER'),
+  validateRequest(updatePatientSchema),
+  controller.update,
+);
+patientsRouter.delete('/:id', authorize('MANAGER'), controller.remove);

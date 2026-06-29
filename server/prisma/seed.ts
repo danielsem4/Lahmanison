@@ -38,6 +38,14 @@ const users: SeedUser[] = [
     role: Role.MANAGER,
     password: 'Manager123!',
   },
+  {
+    email: 'agent@lahmanison.local',
+    firstName: 'Agent',
+    lastName: 'User',
+    phone: '+972500000002',
+    role: Role.AGENT,
+    password: 'Agent123!',
+  },
 ];
 
 async function main() {
@@ -74,6 +82,10 @@ async function main() {
     where: { email: 'admin@lahmanison.local' },
   });
 
+  const agent = await prisma.user.findUniqueOrThrow({
+    where: { email: 'agent@lahmanison.local' },
+  });
+
   // Reset example items so re-seeding stays idempotent
   await prisma.item.deleteMany({ where: { ownerId: admin.id } });
   await prisma.item.createMany({
@@ -98,6 +110,7 @@ async function main() {
         hasImage: true,
         status: PatientStatus.IN_TREATMENT,
         statusNote: 'Weekly follow-up',
+        createdById: agent.id,
       },
       {
         firstName: 'Yossi',
@@ -109,6 +122,7 @@ async function main() {
         hasImage: false,
         status: PatientStatus.PENDING,
         statusNote: null,
+        createdById: agent.id,
       },
       {
         firstName: 'Maya',

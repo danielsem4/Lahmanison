@@ -35,7 +35,10 @@ export function createPatientsController(service: PatientsService) {
 
     async create(req: Request, res: Response, next: NextFunction): Promise<void> {
       try {
-        const patient = await service.create(req.body as CreatePatientDto);
+        const patient = await service.create(
+          req.body as CreatePatientDto,
+          req.currentUser?.userId,
+        );
         res.status(201).json(patient);
       } catch (err) {
         next(err);

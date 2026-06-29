@@ -35,7 +35,8 @@ model User {
   role         Role    @default(AGENT)
   isActive     Boolean @default(true)
 
-  items Item[]
+  items           Item[]
+  createdPatients Patient[] @relation("PatientCreator")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -71,6 +72,13 @@ model Patient {
   status     PatientStatus @default(PENDING)
   statusNote String? // free-text status detail
 
+  // The user (typically an AGENT) who created this patient. Nullable so existing
+  // rows and seed data survive; SetNull keeps patients if the creator is deleted.
+  createdById Int?
+  createdBy   User? @relation("PatientCreator", fields: [createdById], references: [id], onDelete: SetNull)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([createdById])
 }

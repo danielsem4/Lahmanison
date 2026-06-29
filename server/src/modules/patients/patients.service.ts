@@ -21,7 +21,7 @@ export class PatientsService {
     return patient;
   }
 
-  async create(dto: CreatePatientDto): Promise<PatientRecord> {
+  async create(dto: CreatePatientDto, creatorId?: number): Promise<PatientRecord> {
     return this.repository.create({
       firstName: dto.firstName,
       lastName: dto.lastName,
@@ -32,6 +32,7 @@ export class PatientsService {
       hasImage: dto.hasImage ?? false,
       status: dto.status,
       statusNote: dto.statusNote ?? null,
+      createdById: creatorId ?? null,
     });
   }
 

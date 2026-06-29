@@ -45,7 +45,7 @@ export function AppSidebar({ navItems, onLogout, userName }: SidebarProps) {
     <ShadcnSidebar collapsible="icon" side={side}>
       <SidebarHeader className="border-b border-sidebar-border">
         <div className="flex h-10 items-center px-2 group-data-[collapsible=icon]:hidden">
-          <span className="truncate text-sm font-medium text-sidebar-foreground">{userName}</span>
+          <span className="truncate text-base font-medium text-sidebar-foreground">{userName}</span>
         </div>
       </SidebarHeader>
 
@@ -56,8 +56,8 @@ export function AppSidebar({ navItems, onLogout, userName }: SidebarProps) {
               <SidebarMenuItem key={item.path}>
                 <NavLink to={item.path} end={item.path === '/'}>
                   {({ isActive }) => (
-                    <SidebarMenuButton isActive={isActive} tooltip={item.label} asChild={false}>
-                      <item.icon className="size-4 shrink-0" />
+                    <SidebarMenuButton isActive={isActive} tooltip={item.label} asChild={false} className="text-base">
+                      <item.icon className="size-5 shrink-0" />
                       <span>{item.label}</span>
                     </SidebarMenuButton>
                   )}
@@ -75,9 +75,9 @@ export function AppSidebar({ navItems, onLogout, userName }: SidebarProps) {
               <AlertDialogTrigger asChild>
                 <SidebarMenuButton
                   tooltip={t('logout.confirm')}
-                  className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                  className="text-base text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
                 >
-                  <LogOut className="size-4 shrink-0" />
+                  <LogOut className="size-5 shrink-0" />
                   <span>{t('logout.confirm')}</span>
                 </SidebarMenuButton>
               </AlertDialogTrigger>

@@ -11,6 +11,7 @@ export interface Patient {
   hasImage: boolean
   status: PatientStatus
   statusNote: string | null
+  createdById: number | null
   createdAt: string
   updatedAt: string
 }

@@ -12,6 +12,7 @@ export interface PatientRecord {
   hasImage: boolean;
   status: PatientStatus;
   statusNote: string | null;
+  createdById: number | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -26,6 +27,7 @@ export interface CreatePatientData {
   hasImage: boolean;
   status: PatientStatus;
   statusNote?: string | null;
+  createdById?: number | null;
 }
 
 export interface UpdatePatientData {

@@ -37,9 +37,12 @@ export function AppLayout() {
 
   navItems.push({ label: t('nav.settings'), path: '/settings', icon: Settings })
 
+  // Managers see the brand name in place of their personal name.
+  const displayName = user?.role === 'MANAGER' ? t('appName') : (user?.name ?? '')
+
   return (
     <SidebarProvider className="max-h-svh">
-      <AppSidebar navItems={navItems} onLogout={handleLogout} userName={user?.name ?? ''} />
+      <AppSidebar navItems={navItems} onLogout={handleLogout} userName={displayName} />
 
       <SidebarInset className="overflow-hidden">
         <header className="flex h-14 items-center gap-2 border-b border-border bg-card px-4">
