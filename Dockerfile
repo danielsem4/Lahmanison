@@ -14,6 +14,11 @@ WORKDIR /app/server
 COPY server/package*.json ./
 RUN npm ci
 COPY server/ ./
+# prisma.config.ts resolves DATABASE_URL eagerly via Prisma's strict env() helper,
+# so it must be set for `prisma generate` to load the config. `generate` never
+# connects to a DB — this placeholder is build-time only and never reaches the
+# final image; Render injects the real DATABASE_URL at runtime.
+ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder"
 RUN npx prisma generate && npm run build
 
 # ─── Stage 3: slim runtime image ─────────────────────────
