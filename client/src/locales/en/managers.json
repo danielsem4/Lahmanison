@@ -2,6 +2,7 @@
   "title": "Managers",
   "subtitle": "Create and manage the managers in the system.",
   "addManager": "Add manager",
+  "listTitle": "Managers ({{count}})",
   "empty": "No managers yet. Add your first one.",
   "table": {
     "name": "Name",

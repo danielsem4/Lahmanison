@@ -1,0 +1,68 @@
+{
+  "title": "מטופלים",
+  "subtitle": "צפייה וניהול של כל המטופלים במערכת.",
+  "addPatient": "הוספת מטופל",
+  "listTitle": "מטופלים ({{count}})",
+  "empty": "אין מטופלים עדיין. הוסיפו את הראשון.",
+  "yes": "כן",
+  "no": "לא",
+  "table": {
+    "name": "שם מלא",
+    "email": "אימייל",
+    "phone": "טלפון",
+    "age": "גיל",
+    "hasImage": "יש תמונה",
+    "status": "סטטוס",
+    "actions": "פעולות"
+  },
+  "status": {
+    "PENDING": "ממתין",
+    "IN_TREATMENT": "בטיפול",
+    "DISCHARGED": "שוחרר"
+  },
+  "actions": {
+    "view": "צפייה",
+    "edit": "עריכה",
+    "delete": "מחיקה"
+  },
+  "form": {
+    "createTitle": "הוספת מטופל",
+    "editTitle": "עריכת מטופל",
+    "description": "מלאו את פרטי המטופל למטה.",
+    "firstNameLabel": "שם פרטי",
+    "lastNameLabel": "שם משפחה",
+    "emailLabel": "אימייל",
+    "phoneLabel": "מספר טלפון",
+    "ageLabel": "גיל",
+    "statusLabel": "סטטוס",
+    "statusNoteLabel": "הערת סטטוס",
+    "hasImageLabel": "יש תמונה",
+    "cancel": "ביטול",
+    "save": "שמירה"
+  },
+  "detail": {
+    "back": "חזרה",
+    "detailsTitle": "פרטים",
+    "notFound": "המטופל לא נמצא."
+  },
+  "delete": {
+    "title": "מחיקת מטופל",
+    "description": "לא ניתן לבטל פעולה זו.",
+    "cancel": "ביטול",
+    "confirm": "מחיקה"
+  },
+  "validation": {
+    "firstNameRequired": "שם פרטי הוא שדה חובה",
+    "lastNameRequired": "שם משפחה הוא שדה חובה",
+    "emailRequired": "אימייל הוא שדה חובה",
+    "emailInvalid": "יש להזין אימייל תקין",
+    "phoneRequired": "מספר טלפון הוא שדה חובה",
+    "ageInvalid": "יש להזין גיל תקין (0-150)"
+  },
+  "toast": {
+    "created": "המטופל נוצר",
+    "updated": "המטופל עודכן",
+    "deleted": "המטופל נמחק",
+    "error": "משהו השתבש"
+  }
+}

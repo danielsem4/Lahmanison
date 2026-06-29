@@ -8,6 +8,8 @@ import cookieParser from 'cookie-parser';
 import { authRouter } from './modules/auth/auth.routes';
 import { itemsRouter } from './modules/items/items.routes';
 import { managersRouter } from './modules/managers/managers.routes';
+import { agentsRouter } from './modules/agents/agents.routes';
+import { patientsRouter } from './modules/patients/patients.routes';
 import { errorHandler } from './shared/middlewares/errorHandler';
 
 const app = express();
@@ -34,6 +36,8 @@ app.get('/api/health', (_req: Request, res: Response) => {
 app.use('/api/auth', authRouter);
 app.use('/api/items', itemsRouter);
 app.use('/api/managers', managersRouter);
+app.use('/api/agents', agentsRouter);
+app.use('/api/patients', patientsRouter);
 
 // Error handler (must be last)
 app.use(errorHandler);

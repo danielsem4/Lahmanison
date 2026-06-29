@@ -1,5 +1,5 @@
 import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient, Role } from '@prisma/client';
+import { PrismaClient, Role, PatientStatus } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import pg from 'pg';
 import 'dotenv/config';
@@ -38,6 +38,14 @@ const users: SeedUser[] = [
     role: Role.MANAGER,
     password: 'Manager123!',
   },
+  {
+    email: 'agent@lahmanison.local',
+    firstName: 'Agent',
+    lastName: 'User',
+    phone: '+972500000002',
+    role: Role.AGENT,
+    password: 'Agent123!',
+  },
 ];
 
 async function main() {
@@ -74,6 +82,10 @@ async function main() {
     where: { email: 'admin@lahmanison.local' },
   });
 
+  const agent = await prisma.user.findUniqueOrThrow({
+    where: { email: 'agent@lahmanison.local' },
+  });
+
   // Reset example items so re-seeding stays idempotent
   await prisma.item.deleteMany({ where: { ownerId: admin.id } });
   await prisma.item.createMany({
@@ -83,6 +95,49 @@ async function main() {
     ],
   });
   console.log('Seeded 2 example items.');
+
+  // Reset and seed sample patients (idempotent)
+  await prisma.patient.deleteMany();
+  await prisma.patient.createMany({
+    data: [
+      {
+        firstName: 'Dana',
+        lastName: 'Cohen',
+        name: 'Dana Cohen',
+        email: 'dana.cohen@example.com',
+        phone: '+972501111111',
+        age: 34,
+        hasImage: true,
+        status: PatientStatus.IN_TREATMENT,
+        statusNote: 'Weekly follow-up',
+        createdById: agent.id,
+      },
+      {
+        firstName: 'Yossi',
+        lastName: 'Levi',
+        name: 'Yossi Levi',
+        email: 'yossi.levi@example.com',
+        phone: '+972502222222',
+        age: 52,
+        hasImage: false,
+        status: PatientStatus.PENDING,
+        statusNote: null,
+        createdById: agent.id,
+      },
+      {
+        firstName: 'Maya',
+        lastName: 'Bar',
+        name: 'Maya Bar',
+        email: 'maya.bar@example.com',
+        phone: '+972503333333',
+        age: 27,
+        hasImage: true,
+        status: PatientStatus.DISCHARGED,
+        statusNote: 'Completed treatment',
+      },
+    ],
+  });
+  console.log('Seeded 3 sample patients.');
 }
 
 main()

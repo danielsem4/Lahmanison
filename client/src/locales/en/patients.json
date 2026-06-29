@@ -1,0 +1,68 @@
+{
+  "title": "Patients",
+  "subtitle": "View and manage all patients in the system.",
+  "addPatient": "Add patient",
+  "listTitle": "Patients ({{count}})",
+  "empty": "No patients yet. Add your first one.",
+  "yes": "Yes",
+  "no": "No",
+  "table": {
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "age": "Age",
+    "hasImage": "Have image",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "status": {
+    "PENDING": "Pending",
+    "IN_TREATMENT": "In treatment",
+    "DISCHARGED": "Discharged"
+  },
+  "actions": {
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "form": {
+    "createTitle": "Add patient",
+    "editTitle": "Edit patient",
+    "description": "Fill in the patient's details below.",
+    "firstNameLabel": "First name",
+    "lastNameLabel": "Last name",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone number",
+    "ageLabel": "Age",
+    "statusLabel": "Status",
+    "statusNoteLabel": "Status note",
+    "hasImageLabel": "Has image",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "detail": {
+    "back": "Back",
+    "detailsTitle": "Details",
+    "notFound": "Patient not found."
+  },
+  "delete": {
+    "title": "Delete patient",
+    "description": "This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Delete"
+  },
+  "validation": {
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "A valid email is required",
+    "phoneRequired": "Phone number is required",
+    "ageInvalid": "Enter a valid age (0-150)"
+  },
+  "toast": {
+    "created": "Patient created",
+    "updated": "Patient updated",
+    "deleted": "Patient deleted",
+    "error": "Something went wrong"
+  }
+}

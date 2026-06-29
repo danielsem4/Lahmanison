@@ -3,7 +3,15 @@
   "nav": {
     "items": "Items",
     "managers": "Managers",
+    "agents": "Agents",
+    "patients": "Patients",
+    "analytics": "Analytics",
     "settings": "Settings"
+  },
+  "table": {
+    "searchPlaceholder": "Search by name, email or phone",
+    "clearSearch": "Clear search",
+    "noResults": "No matching results."
   },
   "logout": {
     "title": "Sign out",

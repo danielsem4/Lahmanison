@@ -1,0 +1,79 @@
+{
+  "title": "סוכנים",
+  "subtitle": "יצירה וניהול של הסוכנים במערכת.",
+  "addAgent": "הוספת סוכן",
+  "listTitle": "סוכנים ({{count}})",
+  "empty": "אין סוכנים עדיין. הוסיפו את הראשון.",
+  "table": {
+    "name": "שם",
+    "phone": "טלפון",
+    "email": "אימייל",
+    "actions": "פעולות"
+  },
+  "actions": {
+    "view": "צפייה",
+    "edit": "עריכה",
+    "delete": "מחיקה"
+  },
+  "form": {
+    "createTitle": "הוספת סוכן",
+    "editTitle": "עריכת סוכן",
+    "description": "מלאו את פרטי הסוכן למטה.",
+    "firstNameLabel": "שם פרטי",
+    "lastNameLabel": "שם משפחה",
+    "emailLabel": "אימייל",
+    "phoneLabel": "מספר טלפון",
+    "passwordNote": "סיסמה תיווצר ותישלח לסוכן באימייל.",
+    "cancel": "ביטול",
+    "save": "שמירה"
+  },
+  "view": {
+    "title": "פרטי סוכן",
+    "description": "תצוגה לקריאה בלבד של הסוכן."
+  },
+  "detail": {
+    "back": "חזרה",
+    "detailsTitle": "פרטים",
+    "notFound": "הסוכן לא נמצא.",
+    "role": "תפקיד",
+    "status": "סטטוס",
+    "active": "פעיל",
+    "inactive": "לא פעיל",
+    "createdAt": "נוצר בתאריך",
+    "patientsAdded": "מטופלים שנוספו",
+    "patientsInTreatment": "בטיפול",
+    "patientsListTitle": "מטופלים שיצר סוכן זה",
+    "noPatients": "סוכן זה עדיין לא הוסיף מטופלים."
+  },
+  "roles": {
+    "ADMIN": "מנהל מערכת",
+    "MANAGER": "מנהל",
+    "AGENT": "סוכן"
+  },
+  "credentials": {
+    "title": "הסוכן נוצר",
+    "description": "פרטי ההתחברות שלמטה נשלחו לסוכן באימייל. הם מוצגים כאן לצורכי פיתוח בלבד.",
+    "email": "אימייל",
+    "password": "סיסמה",
+    "done": "סיום"
+  },
+  "delete": {
+    "title": "מחיקת סוכן",
+    "description": "לא ניתן לבטל פעולה זו.",
+    "cancel": "ביטול",
+    "confirm": "מחיקה"
+  },
+  "validation": {
+    "firstNameRequired": "שם פרטי הוא שדה חובה",
+    "lastNameRequired": "שם משפחה הוא שדה חובה",
+    "emailRequired": "אימייל הוא שדה חובה",
+    "emailInvalid": "יש להזין אימייל תקין",
+    "phoneRequired": "מספר טלפון הוא שדה חובה"
+  },
+  "toast": {
+    "created": "הסוכן נוצר",
+    "updated": "הסוכן עודכן",
+    "deleted": "הסוכן נמחק",
+    "error": "משהו השתבש"
+  }
+}

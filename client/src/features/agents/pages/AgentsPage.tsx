@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Plus, Eye, Pencil, Trash2, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -24,49 +25,48 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { ManagerFormDialog } from '../components/ManagerFormDialog'
-import { ViewManagerDialog } from '../components/ViewManagerDialog'
+import { AgentFormDialog } from '../components/AgentFormDialog'
 import {
   NewCredentialsDialog,
   type NewCredentials,
 } from '../components/NewCredentialsDialog'
 import {
-  useManagers,
-  useCreateManager,
-  useUpdateManager,
-  useDeleteManager,
-} from '../hooks/useManagers'
-import type { Manager } from '../types/managers.types'
-import type { ManagerFormData } from '../schemas/managers.schema'
+  useAgents,
+  useCreateAgent,
+  useUpdateAgent,
+  useDeleteAgent,
+} from '../hooks/useAgents'
+import type { Agent } from '../types/agents.types'
+import type { AgentFormData } from '../schemas/agents.schema'
 
-function displayName(manager: Manager): string {
-  const name = [manager.firstName, manager.lastName].filter(Boolean).join(' ')
-  return name || manager.name || '—'
+function displayName(agent: Agent): string {
+  const name = [agent.firstName, agent.lastName].filter(Boolean).join(' ')
+  return name || agent.name || '—'
 }
 
-export function ManagersPage() {
-  const { t } = useTranslation('managers')
-  const { data: managers, isLoading } = useManagers()
-  const createManager = useCreateManager()
-  const updateManager = useUpdateManager()
-  const deleteManager = useDeleteManager()
+export function AgentsPage() {
+  const { t } = useTranslation('agents')
+  const navigate = useNavigate()
+  const { data: agents, isLoading } = useAgents()
+  const createAgent = useCreateAgent()
+  const updateAgent = useUpdateAgent()
+  const deleteAgent = useDeleteAgent()
 
   const { search, setSearch, sortKey, sortDirection, toggleSort, rows } = useTableControls(
-    managers,
+    agents,
     {
-      searchText: (m) => [displayName(m), m.email, m.phone].filter(Boolean).join(' '),
+      searchText: (a) => [displayName(a), a.email, a.phone].filter(Boolean).join(' '),
       sortAccessors: {
-        name: (m) => displayName(m),
-        phone: (m) => m.phone,
-        email: (m) => m.email,
+        name: (a) => displayName(a),
+        phone: (a) => a.phone,
+        email: (a) => a.email,
       },
     },
   )
 
   const [formOpen, setFormOpen] = useState(false)
-  const [editing, setEditing] = useState<Manager | null>(null)
-  const [viewing, setViewing] = useState<Manager | null>(null)
-  const [deleteTarget, setDeleteTarget] = useState<Manager | null>(null)
+  const [editing, setEditing] = useState<Agent | null>(null)
+  const [deleteTarget, setDeleteTarget] = useState<Agent | null>(null)
   const [credentials, setCredentials] = useState<NewCredentials | null>(null)
 
   function openCreate() {
@@ -74,22 +74,22 @@ export function ManagersPage() {
     setFormOpen(true)
   }
 
-  function openEdit(manager: Manager) {
-    setEditing(manager)
+  function openEdit(agent: Agent) {
+    setEditing(agent)
     setFormOpen(true)
   }
 
-  function handleSubmit(data: ManagerFormData) {
+  function handleSubmit(data: AgentFormData) {
     if (editing) {
-      updateManager.mutate(
+      updateAgent.mutate(
         { id: editing.id, data },
         { onSuccess: () => setFormOpen(false) },
       )
     } else {
-      createManager.mutate(data, {
+      createAgent.mutate(data, {
         onSuccess: (res) => {
           setFormOpen(false)
-          setCredentials({ email: res.manager.email, password: res.password })
+          setCredentials({ email: res.agent.email, password: res.password })
         },
       })
     }
@@ -97,7 +97,7 @@ export function ManagersPage() {
 
   function confirmDelete() {
     if (!deleteTarget) return
-    deleteManager.mutate(deleteTarget.id, { onSuccess: () => setDeleteTarget(null) })
+    deleteAgent.mutate(deleteTarget.id, { onSuccess: () => setDeleteTarget(null) })
   }
 
   return (
@@ -109,7 +109,7 @@ export function ManagersPage() {
         </div>
         <Button onClick={openCreate}>
           <Plus className="size-4" />
-          {t('addManager')}
+          {t('addAgent')}
         </Button>
       </div>
 
@@ -127,14 +127,14 @@ export function ManagersPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>{t('listTitle', { count: managers?.length ?? 0 })}</CardTitle>
+          <CardTitle>{t('listTitle', { count: agents?.length ?? 0 })}</CardTitle>
         </CardHeader>
         <CardContent>
           {isLoading ? (
             <div className="flex justify-center py-12">
               <Loader2 className="size-6 animate-spin text-muted-foreground" />
             </div>
-          ) : !managers || managers.length === 0 ? (
+          ) : !agents || agents.length === 0 ? (
             <p className="py-12 text-center text-muted-foreground">{t('empty')}</p>
           ) : rows.length === 0 ? (
             <p className="py-12 text-center text-muted-foreground">
@@ -175,16 +175,16 @@ export function ManagersPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {rows.map((manager) => (
-                  <TableRow key={manager.id}>
+                {rows.map((agent) => (
+                  <TableRow key={agent.id}>
                     <TableCell className="text-center font-medium">
-                      {displayName(manager)}
+                      {displayName(agent)}
                     </TableCell>
                     <TableCell className="text-center text-muted-foreground">
-                      {manager.phone ?? '—'}
+                      {agent.phone ?? '—'}
                     </TableCell>
                     <TableCell className="text-center text-muted-foreground">
-                      {manager.email}
+                      {agent.email}
                     </TableCell>
                     <TableCell className="text-center">
                       <div className="flex justify-center gap-1">
@@ -192,7 +192,7 @@ export function ManagersPage() {
                           variant="ghost"
                           size="icon-sm"
                           aria-label={t('actions.view')}
-                          onClick={() => setViewing(manager)}
+                          onClick={() => navigate(`/agents/${agent.id}`)}
                         >
                           <Eye className="size-4" />
                         </Button>
@@ -200,7 +200,7 @@ export function ManagersPage() {
                           variant="ghost"
                           size="icon-sm"
                           aria-label={t('actions.edit')}
-                          onClick={() => openEdit(manager)}
+                          onClick={() => openEdit(agent)}
                         >
                           <Pencil className="size-4" />
                         </Button>
@@ -209,7 +209,7 @@ export function ManagersPage() {
                           size="icon-sm"
                           aria-label={t('actions.delete')}
                           className="text-destructive hover:text-destructive"
-                          onClick={() => setDeleteTarget(manager)}
+                          onClick={() => setDeleteTarget(agent)}
                         >
                           <Trash2 className="size-4" />
                         </Button>
@@ -223,18 +223,12 @@ export function ManagersPage() {
         </CardContent>
       </Card>
 
-      <ManagerFormDialog
+      <AgentFormDialog
         open={formOpen}
         onOpenChange={setFormOpen}
-        manager={editing}
+        agent={editing}
         onSubmit={handleSubmit}
-        isPending={createManager.isPending || updateManager.isPending}
-      />
-
-      <ViewManagerDialog
-        open={!!viewing}
-        onOpenChange={(open) => !open && setViewing(null)}
-        manager={viewing}
+        isPending={createAgent.isPending || updateAgent.isPending}
       />
 
       <NewCredentialsDialog

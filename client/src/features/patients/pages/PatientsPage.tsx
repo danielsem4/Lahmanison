@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Plus, Eye, Pencil, Trash2, Loader2 } from 'lucide-react'
+import { Plus, Eye, Pencil, Trash2, Loader2, Check, Minus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -24,80 +25,69 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { ManagerFormDialog } from '../components/ManagerFormDialog'
-import { ViewManagerDialog } from '../components/ViewManagerDialog'
+import { PatientFormDialog } from '../components/PatientFormDialog'
+import { PatientStatusBadge } from '../components/PatientStatusBadge'
 import {
-  NewCredentialsDialog,
-  type NewCredentials,
-} from '../components/NewCredentialsDialog'
-import {
-  useManagers,
-  useCreateManager,
-  useUpdateManager,
-  useDeleteManager,
-} from '../hooks/useManagers'
-import type { Manager } from '../types/managers.types'
-import type { ManagerFormData } from '../schemas/managers.schema'
+  usePatients,
+  useCreatePatient,
+  useUpdatePatient,
+  useDeletePatient,
+} from '../hooks/usePatients'
+import type { Patient } from '../types/patients.types'
+import type { PatientFormData } from '../schemas/patients.schema'
 
-function displayName(manager: Manager): string {
-  const name = [manager.firstName, manager.lastName].filter(Boolean).join(' ')
-  return name || manager.name || '—'
+function displayName(patient: Patient): string {
+  const name = [patient.firstName, patient.lastName].filter(Boolean).join(' ')
+  return name || patient.name || '—'
 }
 
-export function ManagersPage() {
-  const { t } = useTranslation('managers')
-  const { data: managers, isLoading } = useManagers()
-  const createManager = useCreateManager()
-  const updateManager = useUpdateManager()
-  const deleteManager = useDeleteManager()
+export function PatientsPage() {
+  const { t } = useTranslation('patients')
+  const navigate = useNavigate()
+  const { data: patients, isLoading } = usePatients()
+  const createPatient = useCreatePatient()
+  const updatePatient = useUpdatePatient()
+  const deletePatient = useDeletePatient()
 
   const { search, setSearch, sortKey, sortDirection, toggleSort, rows } = useTableControls(
-    managers,
+    patients,
     {
-      searchText: (m) => [displayName(m), m.email, m.phone].filter(Boolean).join(' '),
+      searchText: (p) => [displayName(p), p.email, p.phone].filter(Boolean).join(' '),
       sortAccessors: {
-        name: (m) => displayName(m),
-        phone: (m) => m.phone,
-        email: (m) => m.email,
+        name: (p) => displayName(p),
+        email: (p) => p.email,
+        phone: (p) => p.phone,
+        age: (p) => p.age,
+        status: (p) => p.status,
       },
     },
   )
 
   const [formOpen, setFormOpen] = useState(false)
-  const [editing, setEditing] = useState<Manager | null>(null)
-  const [viewing, setViewing] = useState<Manager | null>(null)
-  const [deleteTarget, setDeleteTarget] = useState<Manager | null>(null)
-  const [credentials, setCredentials] = useState<NewCredentials | null>(null)
+  const [editing, setEditing] = useState<Patient | null>(null)
+  const [deleteTarget, setDeleteTarget] = useState<Patient | null>(null)
 
   function openCreate() {
     setEditing(null)
     setFormOpen(true)
   }
 
-  function openEdit(manager: Manager) {
-    setEditing(manager)
+  function openEdit(patient: Patient) {
+    setEditing(patient)
     setFormOpen(true)
   }
 
-  function handleSubmit(data: ManagerFormData) {
+  function handleSubmit(data: PatientFormData) {
     if (editing) {
-      updateManager.mutate(
-        { id: editing.id, data },
-        { onSuccess: () => setFormOpen(false) },
-      )
+      updatePatient.mutate({ id: editing.id, data }, { onSuccess: () => setFormOpen(false) })
     } else {
-      createManager.mutate(data, {
-        onSuccess: (res) => {
-          setFormOpen(false)
-          setCredentials({ email: res.manager.email, password: res.password })
-        },
-      })
+      createPatient.mutate(data, { onSuccess: () => setFormOpen(false) })
     }
   }
 
   function confirmDelete() {
     if (!deleteTarget) return
-    deleteManager.mutate(deleteTarget.id, { onSuccess: () => setDeleteTarget(null) })
+    deletePatient.mutate(deleteTarget.id, { onSuccess: () => setDeleteTarget(null) })
   }
 
   return (
@@ -109,7 +99,7 @@ export function ManagersPage() {
         </div>
         <Button onClick={openCreate}>
           <Plus className="size-4" />
-          {t('addManager')}
+          {t('addPatient')}
         </Button>
       </div>
 
@@ -127,14 +117,14 @@ export function ManagersPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>{t('listTitle', { count: managers?.length ?? 0 })}</CardTitle>
+          <CardTitle>{t('listTitle', { count: patients?.length ?? 0 })}</CardTitle>
         </CardHeader>
         <CardContent>
           {isLoading ? (
             <div className="flex justify-center py-12">
               <Loader2 className="size-6 animate-spin text-muted-foreground" />
             </div>
-          ) : !managers || managers.length === 0 ? (
+          ) : !patients || patients.length === 0 ? (
             <p className="py-12 text-center text-muted-foreground">{t('empty')}</p>
           ) : rows.length === 0 ? (
             <p className="py-12 text-center text-muted-foreground">
@@ -154,6 +144,15 @@ export function ManagersPage() {
                     {t('table.name')}
                   </SortableTableHead>
                   <SortableTableHead
+                    sortKey="email"
+                    activeKey={sortKey}
+                    direction={sortDirection}
+                    onSort={toggleSort}
+                    align="center"
+                  >
+                    {t('table.email')}
+                  </SortableTableHead>
+                  <SortableTableHead
                     sortKey="phone"
                     activeKey={sortKey}
                     direction={sortDirection}
@@ -163,28 +162,55 @@ export function ManagersPage() {
                     {t('table.phone')}
                   </SortableTableHead>
                   <SortableTableHead
-                    sortKey="email"
+                    sortKey="age"
                     activeKey={sortKey}
                     direction={sortDirection}
                     onSort={toggleSort}
                     align="center"
                   >
-                    {t('table.email')}
+                    {t('table.age')}
+                  </SortableTableHead>
+                  <TableHead className="text-center">{t('table.hasImage')}</TableHead>
+                  <SortableTableHead
+                    sortKey="status"
+                    activeKey={sortKey}
+                    direction={sortDirection}
+                    onSort={toggleSort}
+                    align="center"
+                  >
+                    {t('table.status')}
                   </SortableTableHead>
                   <TableHead className="text-center">{t('table.actions')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {rows.map((manager) => (
-                  <TableRow key={manager.id}>
+                {rows.map((patient) => (
+                  <TableRow key={patient.id}>
                     <TableCell className="text-center font-medium">
-                      {displayName(manager)}
+                      {displayName(patient)}
                     </TableCell>
                     <TableCell className="text-center text-muted-foreground">
-                      {manager.phone ?? '—'}
+                      {patient.email}
                     </TableCell>
                     <TableCell className="text-center text-muted-foreground">
-                      {manager.email}
+                      {patient.phone ?? '—'}
+                    </TableCell>
+                    <TableCell className="text-center text-muted-foreground">
+                      {patient.age}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <div className="flex justify-center">
+                        {patient.hasImage ? (
+                          <Check className="size-4 text-primary" aria-label={t('yes')} />
+                        ) : (
+                          <Minus className="size-4 text-muted-foreground" aria-label={t('no')} />
+                        )}
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <div className="flex justify-center">
+                        <PatientStatusBadge status={patient.status} />
+                      </div>
                     </TableCell>
                     <TableCell className="text-center">
                       <div className="flex justify-center gap-1">
@@ -192,7 +218,7 @@ export function ManagersPage() {
                           variant="ghost"
                           size="icon-sm"
                           aria-label={t('actions.view')}
-                          onClick={() => setViewing(manager)}
+                          onClick={() => navigate(`/patients/${patient.id}`)}
                         >
                           <Eye className="size-4" />
                         </Button>
@@ -200,7 +226,7 @@ export function ManagersPage() {
                           variant="ghost"
                           size="icon-sm"
                           aria-label={t('actions.edit')}
-                          onClick={() => openEdit(manager)}
+                          onClick={() => openEdit(patient)}
                         >
                           <Pencil className="size-4" />
                         </Button>
@@ -209,7 +235,7 @@ export function ManagersPage() {
                           size="icon-sm"
                           aria-label={t('actions.delete')}
                           className="text-destructive hover:text-destructive"
-                          onClick={() => setDeleteTarget(manager)}
+                          onClick={() => setDeleteTarget(patient)}
                         >
                           <Trash2 className="size-4" />
                         </Button>
@@ -223,24 +249,12 @@ export function ManagersPage() {
         </CardContent>
       </Card>
 
-      <ManagerFormDialog
+      <PatientFormDialog
         open={formOpen}
         onOpenChange={setFormOpen}
-        manager={editing}
+        patient={editing}
         onSubmit={handleSubmit}
-        isPending={createManager.isPending || updateManager.isPending}
-      />
-
-      <ViewManagerDialog
-        open={!!viewing}
-        onOpenChange={(open) => !open && setViewing(null)}
-        manager={viewing}
-      />
-
-      <NewCredentialsDialog
-        open={!!credentials}
-        onOpenChange={(open) => !open && setCredentials(null)}
-        credentials={credentials}
+        isPending={createPatient.isPending || updatePatient.isPending}
       />
 
       <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
